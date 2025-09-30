@@ -12,8 +12,6 @@ public class SensorTraining {
     Limelight3A limelight;
     private LinearOpMode opmode = null;
 
-
-
     private ColorSensor sensorColor;
     int blueV;
     int redV;
@@ -22,7 +20,6 @@ public class SensorTraining {
     boolean blue;
     boolean red;
     boolean green;
-
     public SensorTraining() {
     }
 
