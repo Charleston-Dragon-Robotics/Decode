@@ -7,6 +7,8 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
+
 import java.util.List;
 
 public class Limelight {
@@ -70,5 +72,24 @@ public class Limelight {
             opmode.telemetry.addData("Limelight", "No data available");
         }
         opmode.telemetry.update();
+    }public void getlocation(){
+        limelight.start();
+        LLResult result = limelight.getLatestResult();
+        if(result.isValid()){
+            Pose3D botpose = result.getBotpose();
+            double botposeX = result.getBotpose().getPosition().x;
+            double botposeY = result.getBotpose().getPosition().y;
+            List<LLResultTypes.FiducialResult>fiducialResults = result.getFiducialResults();
+            for(LLResultTypes.FiducialResult fr : fiducialResults) {
+                opmode.telemetry.addData("tx", result.getTx());
+                opmode.telemetry.addData("ty",result.getTy());
+                opmode.telemetry.addData("Ta", result.getTa());
+                opmode.telemetry.addData("Botpose X: ", botposeX);
+
+            }
+        }else {
+            opmode.telemetry.addData("Limelight", "No data");
+        }opmode.telemetry.update();
     }
+
 }

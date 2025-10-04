@@ -19,17 +19,17 @@ public class ServoTraining {
 
         opmode = opMode;
         hwMap = opMode.hardwareMap;
-        servo = hwMap.servo.get("Servo");
-    }
-
-    public void normal(){
-        servo.setPosition(0);
-    }
-    public void right(){
-        servo.setPosition(1);
-    }
-    public void left(){
-        servo.setPosition(-1);
+//        servo = hwMap.servo.get("Servo");
+//    }
+//
+//    public void normal(){
+//        servo.setPosition(0);
+//    }
+//    public void right(){
+//        servo.setPosition(1);
+//    }
+//    public void left(){
+//        servo.setPosition(-1);
     }
 }
 

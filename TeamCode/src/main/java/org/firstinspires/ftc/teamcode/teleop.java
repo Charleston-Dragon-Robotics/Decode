@@ -54,7 +54,7 @@ public class teleop extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            LL.detectPattern();
+            LL.getlocation();
 
             // (pretty much while this is running)
             if (gamepad1.left_stick_y < -.4) {
@@ -82,16 +82,16 @@ public class teleop extends LinearOpMode {
 //            Intake.backwards(speed);
             }
 
-            if (newGamePad1.a.released) {
-                Servo.normal();
-                // normal means 0
-            } else if (newGamePad1.b.released) {
-                Servo.right();
-                // right means 1
-            } else if (newGamePad1.x.released) {
-                Servo.left();
-                // left means -1
-            }
+//            if (newGamePad1.a.released) {
+//                Servo.normal();
+//                // normal means 0
+//            } else if (newGamePad1.b.released) {
+//                Servo.right();
+//                // right means 1
+//            } else if (newGamePad1.x.released) {
+//                Servo.left();
+//                // left means -1
+//            }
 
 //            LLResult result = limelight.getLatestResult();
 //            LL.getResult();
