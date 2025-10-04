@@ -2,10 +2,12 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
+import com.qualcomm.hardware.limelightvision.LLStatus;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 import org.firstinspires.ftc.teamcode.GamepadStates;
 
 import java.util.List;
@@ -15,8 +17,7 @@ import java.util.List;
 // this is the thing that we run
 public class teleop extends LinearOpMode {
 
-    private Limelight3A limelight = null;
-
+    private Limelight3A limelight;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -27,30 +28,34 @@ public class teleop extends LinearOpMode {
         Training Train = new Training();
 //        Intake Intake = new Intake();
         ServoTraining Servo = new ServoTraining();
-        LLOpMode LL = new LLOpMode();
-        SensorTraining Sensor = new SensorTraining();
-        Color Color = new Color();
+        Limelight LL = new Limelight();
 
         Train.init(this);
 //        Intake.init(this);
         Servo.init(this);
         LL.init(this);
-        Sensor.init(this);
-        Color.init(this);
+        //List fiducialResult;
 
 
-        limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        telemetry.setMsTransmissionInterval(11);
-        limelight.pipelineSwitch(7);
-        limelight.start();
+        //limelight = hardwareMap.get(Limelight3A.class, "limelight");
+//        telemetry.setMsTransmissionInterval(11);
+//        limelight.pipelineSwitch(7);
+//        limelight.start();
 
         GamepadStates newGamePad1 = new GamepadStates(gamepad1);
         GamepadStates newGamePad2 = new GamepadStates(gamepad2);
-        // train
+
+        telemetry.addData(">", "Robot Ready.  Press Play.");
+        telemetry.update();
+
+        LL.getStatus();
 
         waitForStart();
 
         while (opModeIsActive()) {
+
+            LL.detectPattern();
+
             // (pretty much while this is running)
             if (gamepad1.left_stick_y < -.4) {
                 // run the forward function from Training program
@@ -68,7 +73,6 @@ public class teleop extends LinearOpMode {
             } else {
                 Train.stop();
             }
-
 
             if (newGamePad1.a.state) {
 //            Intake.forward(speed);
@@ -89,21 +93,8 @@ public class teleop extends LinearOpMode {
                 // left means -1
             }
 
-//            Sensor.color_telemetry();
-            Color.outputColor();
-            Color.getDist();
-
-            LLResult result = limelight.getLatestResult();
-            if (result.isValid()) {
-                // Access fiducial results
-                List<LLResultTypes.FiducialResult> fiducialResults = result.getFiducialResults();
-                for (LLResultTypes.FiducialResult fr : fiducialResults) {
-                    telemetry.addData("Fiducial", "ID: %d, Family: %s, X: %.2f, Y: %.2f", fr.getFiducialId(), fr.getFamily(), fr.getTargetXDegrees(), fr.getTargetYDegrees());
-                }
-
-            } else {
-                telemetry.addData("Limelight", "No data available");
-            }
+//            LLResult result = limelight.getLatestResult();
+//            LL.getResult();
         }
     }
 }
