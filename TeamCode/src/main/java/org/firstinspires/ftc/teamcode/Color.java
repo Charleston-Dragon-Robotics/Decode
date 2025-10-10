@@ -34,6 +34,4 @@ public class Color {
         opmode.telemetry.addData("Alpha: ", color.alpha());
         opmode.telemetry.update();
     }
-
-
 }
