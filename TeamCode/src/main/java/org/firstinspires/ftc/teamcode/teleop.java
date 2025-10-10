@@ -27,12 +27,12 @@ public class teleop extends LinearOpMode {
 
         Training Train = new Training();
 //        Intake Intake = new Intake();
-        ServoTraining Servo = new ServoTraining();
+//        ServoTraining Servo = new ServoTraining();
         Limelight LL = new Limelight();
 
         Train.init(this);
 //        Intake.init(this);
-        Servo.init(this);
+//        Servo.init(this);
         LL.init(this);
         //List fiducialResult;
 
@@ -82,16 +82,16 @@ public class teleop extends LinearOpMode {
 //            Intake.backwards(speed);
             }
 
-            if (newGamePad1.a.released) {
-                Servo.normal();
-                // normal means 0
-            } else if (newGamePad1.b.released) {
-                Servo.right();
-                // right means 1
-            } else if (newGamePad1.x.released) {
-                Servo.left();
-                // left means -1
-            }
+//            if (newGamePad1.a.released) {
+//                Servo.normal();
+//                // normal means 0
+//            } else if (newGamePad1.b.released) {
+//                Servo.right();
+//                // right means 1
+//            } else if (newGamePad1.x.released) {
+//                Servo.left();
+//                // left means -1
+//            }
 
 //            LLResult result = limelight.getLatestResult();
 //            LL.getResult();
