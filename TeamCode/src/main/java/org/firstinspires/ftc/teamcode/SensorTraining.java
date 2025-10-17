@@ -80,7 +80,6 @@ public class SensorTraining {
         }
     }
 
-
     // gets blue red and green values!!! ^w^
     public double getBlueV() {
         return sensorColor.blue();
