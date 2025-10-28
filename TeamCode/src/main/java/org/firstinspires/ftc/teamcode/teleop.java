@@ -18,7 +18,6 @@ import java.util.List;
 // this too
 
 
-
 @TeleOp(name = "Teleop", group = "Teleop")
 // this is the thing that we run
 public class teleop extends LinearOpMode {
@@ -35,12 +34,12 @@ public class teleop extends LinearOpMode {
 
 
         Training Train = new Training();
-//        Intake Intake = new Intake();
+        Intake Intake = new Intake();
         ServoTraining Servo = new ServoTraining();
         Limelight LL = new Limelight();
         Color Color = new Color();
         Train.init(this);
-//        Intake.init(this);
+        Intake.init(this);
         Servo.init(this);
         LL.init(this);
         Color.init(this);
@@ -66,7 +65,7 @@ public class teleop extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            LL.detectPattern();
+//            LL.detectPattern();
 
             // (pretty much while this is running)
             if (gamepad1.left_stick_y < -.4) {
@@ -95,24 +94,26 @@ public class teleop extends LinearOpMode {
 //                relativeLayout.setBackgroundColor(-1);
 //            }
 
-            if (newGamePad1.a.state) {
-//            Intake.forward(speed);
+            if (gamepad2.right_stick_y > .4) {
+                // grab ball
+                Intake.intake();
+            } else if (gamepad2.right_stick_y < -.4) {
+                // expel ball
+                Intake.reverse();
+            } else {
+                Intake.stop();
             }
 
-            if (newGamePad1.b.state) {
-//            Intake.backwards(speed);
-            }
-
-            if (newGamePad1.a.released) {
-                Servo.normal();
-                // normal means 0
-            } else if (newGamePad1.b.released) {
-                Servo.right();
-                // right means 1
-            } else if (newGamePad1.x.released) {
-                Servo.left();
-                // left means -1
-            }
+//            if (newGamePad1.a.released) {
+//                Servo.normal();
+//                // normal means 0
+//            } else if (newGamePad1.b.released) {
+//                Servo.right();
+//                // right means 1
+//            } else if (newGamePad1.x.released) {
+//                Servo.left();
+//                // left means -1
+//            }
 
             if (newGamePad1.left_bumper.released) {
                 // when left bumper is pressed, slows down movement universally
