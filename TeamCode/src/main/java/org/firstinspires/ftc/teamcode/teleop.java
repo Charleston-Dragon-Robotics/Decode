@@ -10,6 +10,7 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+//import com.bylazar.
 
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 import org.firstinspires.ftc.teamcode.GamepadStates;
@@ -35,7 +36,7 @@ public class teleop extends LinearOpMode {
 
 
         Training Train = new Training();
-//        Intake Intake = new Intake();
+        Intake Intake = new Intake();
         ServoTraining Servo = new ServoTraining();
         Limelight LL = new Limelight();
         Color Color = new Color();
