@@ -27,7 +27,7 @@ public class Intake {
 
 
         // forward, not necessary to set but still here
-        IntakeM.setDirection(DcMotorSimple.Direction.FORWARD);
+        IntakeM.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         // sets power to 0 to make sure nothing moves at first

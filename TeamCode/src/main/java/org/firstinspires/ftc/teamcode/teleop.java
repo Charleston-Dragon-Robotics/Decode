@@ -36,12 +36,12 @@ public class teleop extends LinearOpMode {
         Training Train = new Training();
         Intake Intake = new Intake();
         ServoTraining Servo = new ServoTraining();
-        Limelight LL = new Limelight();
+//        Limelight LL = new Limelight();
         Color Color = new Color();
         Train.init(this);
         Intake.init(this);
         Servo.init(this);
-        LL.init(this);
+//        LL.init(this);
         Color.init(this);
         //List fiducialResult;
 
@@ -57,14 +57,13 @@ public class teleop extends LinearOpMode {
         telemetry.addData(">", "Robot Ready.  Press Play.");
         telemetry.update();
 
-        LL.getStatus();
+//        LL.getStatus();
 
         double speed = 0.5;
 
         waitForStart();
 
         while (opModeIsActive()) {
-
 //            LL.detectPattern();
 
             // (pretty much while this is running)
