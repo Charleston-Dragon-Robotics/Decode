@@ -25,4 +25,7 @@ android {
 
 dependencies {
     implementation project(':FtcRobotController')
+
+    //add this also for pedro
+    implementation 'com.pedropathing:ftc:x.y.z'
 }
