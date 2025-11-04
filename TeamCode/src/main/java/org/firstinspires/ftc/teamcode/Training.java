@@ -13,9 +13,6 @@ public class Training {
     private DcMotor BackRM = null;
     private DcMotor BackLM = null;
 
-
-
-
 private LinearOpMode opmode = null;
 
 
@@ -63,19 +60,33 @@ private LinearOpMode opmode = null;
         BackRM.setPower(-speed);
         BackLM.setPower(-speed);
     }
-    public void left(double speed) {
-        // set powers for motors to go left here
+    public void right(double speed) {
+        // set powers for motors to go right here
         FrontRM.setPower(-speed);
         FrontLM.setPower(speed);
         BackRM.setPower(-speed);
         BackLM.setPower(speed);
     }
-    public void right(double speed) {
-        // set powers for motors to go right here
+    public void left(double speed) {
+        // set powers for motors to go left here
         FrontRM.setPower(speed);
         FrontLM.setPower(-speed);
         BackRM.setPower(speed);
         BackLM.setPower(-speed);
+}
+    public void StraffRight(double speed) {
+        // set powers for motors to go right here
+        FrontRM.setPower(-speed);
+        FrontLM.setPower(speed);
+        BackRM.setPower(speed);
+        BackLM.setPower(-speed);
+    }
+    public void StraffLeft(double speed) {
+        // set powers for motors to go right here
+        FrontRM.setPower(speed);
+        FrontLM.setPower(-speed);
+        BackRM.setPower(-speed);
+        BackLM.setPower(speed);
     }
     public void stop() {
         // set motor power to stop

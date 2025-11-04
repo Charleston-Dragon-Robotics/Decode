@@ -16,6 +16,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 import org.firstinspires.ftc.teamcode.GamepadStates;
 
 import java.util.List;
+
+import kotlin._Assertions;
 // this too
 
 
@@ -38,12 +40,12 @@ public class teleop extends LinearOpMode {
         Training Train = new Training();
         Intake Intake = new Intake();
         ServoTraining Servo = new ServoTraining();
-        Limelight LL = new Limelight();
+//        Limelight LL = new Limelight();
         Color Color = new Color();
         Train.init(this);
-//        Intake.init(this);
+        Intake.init(this);
         Servo.init(this);
-        LL.init(this);
+//        LL.init(this);
         Color.init(this);
         //List fiducialResult;
 
@@ -59,7 +61,7 @@ public class teleop extends LinearOpMode {
         telemetry.addData(">", "Robot Ready.  Press Play.");
         telemetry.update();
 
-        LL.getStatus();
+//        LL.getStatus();
 
         double speed = 0.5;
 
@@ -67,16 +69,24 @@ public class teleop extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            LL.detectPattern();
+            newGamePad1.updateState();
+            newGamePad2.updateState();
+
+
+//            LL.detectPattern();
 
             // (pretty much while this is running)
             if (gamepad1.left_stick_y < -.4) {
-                // run the forward function from Training program
+                // run the forward function from Functions program
                 Train.forward(speed);
             } else if (gamepad1.left_stick_y > .4) {
                 // backwards
                 Train.backwards(speed);
-            } else if (gamepad1.right_stick_x < -.4) {
+            } else if (gamepad1.left_stick_x <-.4) {
+                Train.StraffLeft(speed);
+            } else if (gamepad1.left_stick_x > .4) {
+                Train.StraffRight(speed);
+            }else if (gamepad1.right_stick_x < -.4) {
                 // left
                 Train.left(speed);
             } else if (gamepad1.right_stick_x > .4) {
@@ -87,6 +97,9 @@ public class teleop extends LinearOpMode {
                 Train.stop();
             }
 
+
+
+
             telemetry.addData("Speed: ", speed);
             telemetry.update();
 
@@ -96,30 +109,35 @@ public class teleop extends LinearOpMode {
 //                relativeLayout.setBackgroundColor(-1);
 //            }
 
-            if (newGamePad1.a.state) {
-//            Intake.forward(speed);
+            if (gamepad2.right_stick_y < -.4) {
+                Intake.intake();
+            }else if(gamepad2.right_stick_y > .4) {
+                Intake.outTake();
+            }
+            else {
+                Intake.intakeStop();
             }
 
-            if (newGamePad1.b.state) {
+//            if (gamepad2.right_stick_y > .4) {
 //            Intake.backwards(speed);
-            }
+//            }
 
-            if (newGamePad1.a.released) {
-                Servo.normal();
-                // normal means 0
-            } else if (newGamePad1.b.released) {
-                Servo.right();
-                // right means 1
-            } else if (newGamePad1.x.released) {
-                Servo.left();
-                // left means -1
-            }
+//            if (newGamePad1.a.released) {
+//                Servo.normal();
+//                // normal means 0
+//            } else if (newGamePad1.b.released) {
+//                Servo.right();
+//                // right means 1
+//            } else if (newGamePad1.x.released) {
+//                Servo.left();
+//                // left means -1
+//            }
 
             if (newGamePad1.left_bumper.released) {
                 // when left bumper is pressed, slows down movement universally
                 speed -= (0.1);
-                if (speed <= 0) {
-                    speed = 0;
+                if (speed <= 0.1) {
+                    speed = 0.1;
                 }
 
             } else if (newGamePad1.right_bumper.released) {
