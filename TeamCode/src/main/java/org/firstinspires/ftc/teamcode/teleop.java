@@ -21,7 +21,6 @@ import kotlin._Assertions;
 // this too
 
 
-
 @TeleOp(name = "Teleop", group = "Teleop")
 // this is the thing that we run
 public class teleop extends LinearOpMode {
@@ -109,18 +108,15 @@ public class teleop extends LinearOpMode {
 //                relativeLayout.setBackgroundColor(-1);
 //            }
 
-            if (gamepad2.right_stick_y < -.4) {
+            if (gamepad2.right_stick_y > .4) {
+                // grab ball
                 Intake.intake();
-            }else if(gamepad2.right_stick_y > .4) {
-                Intake.outTake();
+            } else if (gamepad2.right_stick_y < -.4) {
+                // expel ball
+                Intake.reverse();
+            } else {
+                Intake.stop();
             }
-            else {
-                Intake.intakeStop();
-            }
-
-//            if (gamepad2.right_stick_y > .4) {
-//            Intake.backwards(speed);
-//            }
 
 //            if (newGamePad1.a.released) {
 //                Servo.normal();

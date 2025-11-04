@@ -39,10 +39,12 @@ public class Intake {
         // when intake is called, moves the motor forward with power value 1
         IntakeM.setPower(1);
     }
-    public void outTake() {
+    public void reverse(){
+        // when intake is called, moves the motor forward with power value 1
         IntakeM.setPower(-1);
     }
-    public void intakeStop(){
+    public void stop(){
+        // stops the intake, obviously
         IntakeM.setPower(0);
     }
 
