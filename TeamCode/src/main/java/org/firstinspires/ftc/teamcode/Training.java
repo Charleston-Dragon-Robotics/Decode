@@ -13,10 +13,7 @@ public class Training {
     private DcMotor BackRM = null;
     private DcMotor BackLM = null;
 
-
-
-
-    private LinearOpMode opmode = null;
+private LinearOpMode opmode = null;
 
 
     public Training() {
@@ -49,26 +46,47 @@ public class Training {
         BackLM.setPower(0);
     }
 
-    public void forward() {
+    public void forward(double speed) {
         // set powers for motors to go forward here
-        FrontRM.setPower(1);
-        FrontLM.setPower(1);
-        BackRM.setPower(1);
-        BackLM.setPower(1);
+        FrontRM.setPower(speed);
+        FrontLM.setPower(speed);
+        BackRM.setPower(speed);
+        BackLM.setPower(speed);
     }
-    public void backwards() {
+    public void backwards(double speed) {
         // set powers for motors to go backwards here
-        FrontRM.setPower(-1);
-        FrontLM.setPower(-1);
-        BackRM.setPower(-1);
-        BackLM.setPower(-1);
+        FrontRM.setPower(-speed);
+        FrontLM.setPower(-speed);
+        BackRM.setPower(-speed);
+        BackLM.setPower(-speed);
     }
-    public void left() {
+    public void right(double speed) {
+        // set powers for motors to go right here
+        FrontRM.setPower(-speed);
+        FrontLM.setPower(speed);
+        BackRM.setPower(-speed);
+        BackLM.setPower(speed);
+    }
+    public void left(double speed) {
         // set powers for motors to go left here
-        FrontRM.setPower(1);
-        FrontLM.setPower(-1);
-        BackRM.setPower(1);
-        BackLM.setPower(-1);
+        FrontRM.setPower(speed);
+        FrontLM.setPower(-speed);
+        BackRM.setPower(speed);
+        BackLM.setPower(-speed);
+}
+    public void StraffRight(double speed) {
+        // set powers for motors to go right here
+        FrontRM.setPower(-speed);
+        FrontLM.setPower(speed);
+        BackRM.setPower(speed);
+        BackLM.setPower(-speed);
+    }
+    public void StraffLeft(double speed) {
+        // set powers for motors to go right here
+        FrontRM.setPower(speed);
+        FrontLM.setPower(-speed);
+        BackRM.setPower(-speed);
+        BackLM.setPower(speed);
     }
     public void right() {
         // set powers for motors to go right here
