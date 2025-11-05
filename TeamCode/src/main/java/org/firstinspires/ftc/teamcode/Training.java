@@ -88,6 +88,13 @@ private LinearOpMode opmode = null;
         BackRM.setPower(-speed);
         BackLM.setPower(speed);
     }
+    public void right() {
+        // set powers for motors to go right here
+        FrontRM.setPower(-1);
+        FrontLM.setPower(1);
+        BackRM.setPower(-1);
+        BackLM.setPower( 1);
+    }
     public void stop() {
         // set motor power to stop
         FrontRM.setPower(0);
