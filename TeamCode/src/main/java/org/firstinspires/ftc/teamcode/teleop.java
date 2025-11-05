@@ -17,7 +17,6 @@ import org.firstinspires.ftc.teamcode.GamepadStates;
 
 import java.util.List;
 
-import kotlin._Assertions;
 // this too
 
 
@@ -35,12 +34,14 @@ public class teleop extends LinearOpMode {
         int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
         relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
 
-
+        // declare subassembly classes
         Training Train = new Training();
         Intake Intake = new Intake();
         ServoTraining Servo = new ServoTraining();
 //        Limelight LL = new Limelight();
         Color Color = new Color();
+
+        // initialize subassembly classes
         Train.init(this);
         Intake.init(this);
         Servo.init(this);
@@ -57,9 +58,6 @@ public class teleop extends LinearOpMode {
         GamepadStates newGamePad1 = new GamepadStates(gamepad1);
         GamepadStates newGamePad2 = new GamepadStates(gamepad2);
 
-        telemetry.addData(">", "Robot Ready.  Press Play.");
-        telemetry.update();
-
 //        LL.getStatus();
 
         double speed = 0.5;
@@ -74,7 +72,7 @@ public class teleop extends LinearOpMode {
 
 //            LL.detectPattern();
 
-            // (pretty much while this is running)
+            // controls movement
             if (gamepad1.left_stick_y < -.4) {
                 // run the forward function from Functions program
                 Train.forward(speed);
@@ -108,6 +106,7 @@ public class teleop extends LinearOpMode {
 //                relativeLayout.setBackgroundColor(-1);
 //            }
 
+            // intake control
             if (gamepad2.right_stick_y > .4) {
                 // grab ball
                 Intake.intake();
@@ -118,24 +117,15 @@ public class teleop extends LinearOpMode {
                 Intake.stop();
             }
 
-//            if (newGamePad1.a.released) {
-//                Servo.normal();
-//                // normal means 0
-//            } else if (newGamePad1.b.released) {
-//                Servo.right();
-//                // right means 1
-//            } else if (newGamePad1.x.released) {
-//                Servo.left();
-//                // left means -1
-//            }
-
+            //speed control
+            //decress drive speed varible
             if (newGamePad1.left_bumper.released) {
                 // when left bumper is pressed, slows down movement universally
                 speed -= (0.1);
                 if (speed <= 0.1) {
                     speed = 0.1;
                 }
-
+            //increse speed varibal
             } else if (newGamePad1.right_bumper.released) {
                 // when right bumper is pressed, speeds up movement universally
                 speed += (0.1);
