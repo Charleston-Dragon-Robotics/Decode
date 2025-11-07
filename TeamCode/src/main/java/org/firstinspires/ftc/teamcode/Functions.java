@@ -12,6 +12,7 @@ import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Functions {
+    //intalise varible
     public static Follower follower;
     static PoseHistory poseHistory;
 
@@ -30,7 +31,7 @@ public class Functions {
     public void init(LinearOpMode opMode) {
 
     }
-
+//creates function
     public void forwardForDist(double target, double speed) {
         while (Math.abs(follower.getPose().getX()) < target) {
             Drive.forward(speed);

@@ -8,8 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcontroller.external.samples.SensorColor;
 
 public class Intake {
-
-    SensorTraining Color = new SensorTraining();
+    //creates motor
     private DcMotor IntakeM = null;
     private LinearOpMode opmode = null;
 
@@ -23,10 +22,11 @@ public class Intake {
         opmode = opMode;
         hwMap = opMode.hardwareMap;
 
+        //names the motor
         IntakeM = hwMap.dcMotor.get("IntakeM");
 
 
-        // forward, not necessary to set but still here
+        // sets the motors direction
         IntakeM.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
@@ -35,20 +35,17 @@ public class Intake {
 
 
     }
+    //creates intake functions
     public void intake(){
         // when intake is called, moves the motor forward with power value 1
         IntakeM.setPower(1);
     }
     public void reverse(){
-        // when intake is called, moves the motor forward with power value 1
+        // when intake is called, moves the motor reverse with power value 1
         IntakeM.setPower(-1);
     }
     public void stop(){
         // stops the intake, obviously
         IntakeM.setPower(0);
-    }
-
-    public void kick() {
-        Color.color_telemetry();
     }
 }

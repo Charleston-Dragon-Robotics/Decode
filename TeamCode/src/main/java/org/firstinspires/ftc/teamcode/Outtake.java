@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Outtake {
+    //intalise motors
     private DcMotorEx OuttakeRM = null;
     private DcMotorEx OuttakeLM = null;
 
@@ -20,10 +21,11 @@ public class Outtake {
         opmode = opMode;
         hwMap = opMode.hardwareMap;
 
+        //names the motors
         OuttakeRM = hwMap.get(DcMotorEx.class, "OuttakeRM");
         OuttakeLM = hwMap.get(DcMotorEx.class, "OuttakeLM");
 
-        // LEFT motor is backwards for now
+        //sets motor directions
         OuttakeRM.setDirection(DcMotorSimple.Direction.FORWARD);
         OuttakeLM.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -31,10 +33,12 @@ public class Outtake {
         OuttakeRM.setPower(0);
         OuttakeLM.setPower(0);
 
+        // allows to run motors for amounts
         OuttakeRM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         OuttakeLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
+    //creates functions
     public void outtake() {
 
         // starts the outtake motors when called ^w^

@@ -96,7 +96,7 @@ public class teleop extends LinearOpMode {
 
 
 
-
+            //intalise speed as a varible
             telemetry.addData("Speed: ", speed);
             telemetry.update();
 

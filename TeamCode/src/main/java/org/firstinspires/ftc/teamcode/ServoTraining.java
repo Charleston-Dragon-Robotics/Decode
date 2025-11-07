@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class ServoTraining {
     private LinearOpMode opmode = null;
 
+    //intalise servos
     private Servo servo = null;
 
 
@@ -22,6 +23,7 @@ public class ServoTraining {
         servo = hwMap.servo.get("Servo");
     }
 
+    //creates servo functions
     public void normal(){
         servo.setPosition(0);
     }
@@ -32,8 +34,3 @@ public class ServoTraining {
         servo.setPosition(-1);
     }
 }
-
-
-
-    // run until the end of the match (driver presses STOP)
-

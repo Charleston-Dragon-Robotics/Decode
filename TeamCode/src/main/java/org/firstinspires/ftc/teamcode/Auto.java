@@ -48,7 +48,7 @@ public class Auto extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-
+        // declare subassembly classes
         Training Drive = new Training();
 //        Intake Intake = new Intake();
 //        Outtake Outtake = new Outtake();
@@ -57,6 +57,7 @@ public class Auto extends LinearOpMode {
 //        Limelight Limelight = new Limelight();
         Functions Fun = new Functions();
 
+        // names subassembly classes
         Drive.init(this);
 //        Intake.init(this);
 //        Outtake.init(this);
@@ -68,6 +69,7 @@ public class Auto extends LinearOpMode {
 //
 //        poseHistory = follower.getPoseHistory();
 //
+        //code for the auto phase
         waitForStart();
 //
 //        Fun.forwardForDist(12, .5);

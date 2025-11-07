@@ -75,25 +75,18 @@ private LinearOpMode opmode = null;
         BackLM.setPower(-speed);
 }
     public void StraffRight(double speed) {
-        // set powers for motors to go right here
+        // set powers for motors to straff right here
         FrontRM.setPower(-speed);
         FrontLM.setPower(speed);
         BackRM.setPower(speed);
         BackLM.setPower(-speed);
     }
     public void StraffLeft(double speed) {
-        // set powers for motors to go right here
+        // set powers for motors to straffs left here
         FrontRM.setPower(speed);
         FrontLM.setPower(-speed);
         BackRM.setPower(-speed);
         BackLM.setPower(speed);
-    }
-    public void right() {
-        // set powers for motors to go right here
-        FrontRM.setPower(-1);
-        FrontLM.setPower(1);
-        BackRM.setPower(-1);
-        BackLM.setPower( 1);
     }
     public void stop() {
         // set motor power to stop
