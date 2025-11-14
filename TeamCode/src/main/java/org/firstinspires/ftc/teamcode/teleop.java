@@ -55,6 +55,7 @@ public class teleop extends LinearOpMode {
         while (opModeIsActive()) {
 
             LL.detectPattern();
+            LL.locationTest();
 
             // (pretty much while this is running)
             if (gamepad1.left_stick_y < -.4) {
@@ -98,3 +99,4 @@ public class teleop extends LinearOpMode {
         }
     }
 }
+
