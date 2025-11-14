@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 //import com.bylazar.
 
+import org.firstinspires.ftc.robotcore.external.JavaUtil;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
 import org.firstinspires.ftc.teamcode.GamepadStates;
 
@@ -36,15 +37,15 @@ public class teleop extends LinearOpMode {
 
         // declare subassembly classes
         Training Train = new Training();
-        Intake Intake = new Intake();
-        ServoTraining Servo = new ServoTraining();
+//        Intake Intake = new Intake();
+//        ServoTraining Servo = new ServoTraining();
 //        Limelight LL = new Limelight();
         Color Color = new Color();
 
         // initialize subassembly classes
         Train.init(this);
-        Intake.init(this);
-        Servo.init(this);
+//        Intake.init(this);
+//        Servo.init(this);
 //        LL.init(this);
         Color.init(this);
         //List fiducialResult;
@@ -61,6 +62,7 @@ public class teleop extends LinearOpMode {
 //        LL.getStatus();
 
         double speed = 0.5;
+//        float Hue;
 
         waitForStart();
 
@@ -79,11 +81,11 @@ public class teleop extends LinearOpMode {
             } else if (gamepad1.left_stick_y > .4) {
                 // backwards
                 Train.backwards(speed);
-            } else if (gamepad1.left_stick_x <-.4) {
+            } else if (gamepad1.left_stick_x < -.4) {
                 Train.StraffLeft(speed);
             } else if (gamepad1.left_stick_x > .4) {
                 Train.StraffRight(speed);
-            }else if (gamepad1.right_stick_x < -.4) {
+            } else if (gamepad1.right_stick_x < -.4) {
                 // left
                 Train.left(speed);
             } else if (gamepad1.right_stick_x > .4) {
@@ -95,10 +97,15 @@ public class teleop extends LinearOpMode {
             }
 
 
+//            Color.HSV();
+
+            telemetry.addLine("Is it purple?"+ Color.ispurpleF());
+            telemetry.update();
+
 
             //intalise speed as a varible
-            telemetry.addData("Speed: ", speed);
-            telemetry.update();
+//            telemetry.addLine("Speed: "+ speed);
+//            telemetry.update();
 
 //            if (Color.isGreen()) {
 //                relativeLayout.setBackgroundColor(Color.greenV());
@@ -106,16 +113,16 @@ public class teleop extends LinearOpMode {
 //                relativeLayout.setBackgroundColor(-1);
 //            }
 
-            // intake control
-            if (gamepad2.right_stick_y > .4) {
-                // grab ball
-                Intake.intake();
-            } else if (gamepad2.right_stick_y < -.4) {
-                // expel ball
-                Intake.reverse();
-            } else {
-                Intake.stop();
-            }
+//            // intake control
+//            if (gamepad2.right_stick_y > .4) {
+//                // grab ball
+//                Intake.intake();
+//            } else if (gamepad2.right_stick_y < -.4) {
+//                // expel ball
+//                Intake.reverse();
+//            } else {
+//                Intake.stop();
+//            }
 
             //speed control
             //decress drive speed varible
@@ -125,7 +132,7 @@ public class teleop extends LinearOpMode {
                 if (speed <= 0.1) {
                     speed = 0.1;
                 }
-            //increse speed varibal
+                //increse speed varibal
             } else if (newGamePad1.right_bumper.released) {
                 // when right bumper is pressed, speeds up movement universally
                 speed += (0.1);
@@ -133,6 +140,11 @@ public class teleop extends LinearOpMode {
                     speed = (1);
                 }
             }
+
+//            if(Color.ispurpleF()) {
+//                telemetry.addLine("Purple!");
+//                telemetry.update();
+//            }
 //            LLResult result = limelight.getLatestResult();
 //            LL.getResult();
         }
