@@ -23,14 +23,17 @@ public class ServoTraining {
         servo = hwMap.servo.get("Servo");
     }
 
+
     //creates servo functions
-    public void normal(){
+    public void normal() {
         servo.setPosition(0);
     }
-    public void right(){
+
+    public void right() {
         servo.setPosition(1);
     }
-    public void left(){
+
+    public void left() {
         servo.setPosition(-1);
     }
 }

@@ -35,6 +35,7 @@ public class teleop extends LinearOpMode {
         relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
 
         // declare subassembly classes
+        Launcher Launch = new Launcher();
         Training Train = new Training();
         Intake Intake = new Intake();
         ServoTraining Servo = new ServoTraining();
@@ -47,6 +48,7 @@ public class teleop extends LinearOpMode {
         Servo.init(this);
 //        LL.init(this);
         Color.init(this);
+        Launch.init(this);
         //List fiducialResult;
 
 
@@ -79,11 +81,11 @@ public class teleop extends LinearOpMode {
             } else if (gamepad1.left_stick_y > .4) {
                 // backwards
                 Train.backwards(speed);
-            } else if (gamepad1.left_stick_x <-.4) {
+            } else if (gamepad1.left_stick_x < -.4) {
                 Train.StraffLeft(speed);
             } else if (gamepad1.left_stick_x > .4) {
                 Train.StraffRight(speed);
-            }else if (gamepad1.right_stick_x < -.4) {
+            } else if (gamepad1.right_stick_x < -.4) {
                 // left
                 Train.left(speed);
             } else if (gamepad1.right_stick_x > .4) {
@@ -95,10 +97,9 @@ public class teleop extends LinearOpMode {
             }
 
 
-
             //intalise speed as a varible
             telemetry.addData("Speed: ", speed);
-            telemetry.update();
+//            telemetry.update();
 
 //            if (Color.isGreen()) {
 //                relativeLayout.setBackgroundColor(Color.greenV());
@@ -116,6 +117,14 @@ public class teleop extends LinearOpMode {
             } else {
                 Intake.stop();
             }
+            if (newGamePad2.a.state){
+                Launch.manualLauncher();
+            }else {
+                Launch.Stop();
+            }
+//            if (gamepad2.left_stick_x > .4){
+//                Launch.autoLaunch();
+//            }
 
             //speed control
             //decress drive speed varible
@@ -125,7 +134,7 @@ public class teleop extends LinearOpMode {
                 if (speed <= 0.1) {
                     speed = 0.1;
                 }
-            //increse speed varibal
+                //increse speed varibal
             } else if (newGamePad1.right_bumper.released) {
                 // when right bumper is pressed, speeds up movement universally
                 speed += (0.1);

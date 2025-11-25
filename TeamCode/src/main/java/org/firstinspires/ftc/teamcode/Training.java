@@ -73,7 +73,7 @@ private LinearOpMode opmode = null;
         FrontLM.setPower(-speed);
         BackRM.setPower(speed);
         BackLM.setPower(-speed);
-}
+    }
     public void StraffRight(double speed) {
         // set powers for motors to straff right here
         FrontRM.setPower(-speed);
