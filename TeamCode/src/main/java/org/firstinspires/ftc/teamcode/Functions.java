@@ -43,7 +43,7 @@ public class Functions {
 //    if(Math.abs(follower.getPose().
 //
 //    getX())>
-//    double distance)
+//    double area)
 //
 //    {
 //        end = true;

@@ -12,6 +12,8 @@ import java.util.List;
 public class Limelight {
     private LinearOpMode opmode = null;
 
+
+    double area;
     private Limelight3A limelight;
 
     public Limelight() {
@@ -67,6 +69,17 @@ public class Limelight {
 //                opmode.telemetry.addData("Fiducial", "ID: %d, Family: %s, X: %.2f, Y: %.2f", fr.getFiducialId(), fr.getFamily(), fr.getTargetXDegrees(), fr.getTargetYDegrees());
             }
         } else {
+            opmode.telemetry.addData("Limelight", "No data available");
+        }
+        opmode.telemetry.update();
+    }
+    public void distanceTag(){
+        limelight.start();
+        LLResult result = limelight.getLatestResult();
+        if (result.isValid()) {
+            area= result.getTa();
+            opmode.telemetry.addData("Distance",6.1+(-3.14 * Math.log(area)));
+        }else {
             opmode.telemetry.addData("Limelight", "No data available");
         }
         opmode.telemetry.update();

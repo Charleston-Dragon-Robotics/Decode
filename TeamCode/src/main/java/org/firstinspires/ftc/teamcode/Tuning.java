@@ -169,9 +169,9 @@ class LocalizationTest extends OpMode {
 /**
  * This is the ForwardTuner OpMode. This tracks the forward movement of the robot and displays the
  * necessary ticks to inches multiplier. This displayed multiplier is what's necessary to scale the
- * robot's current distance in ticks to the specified distance in inches. So, to use this, run the
- * tuner, then pull/push the robot to the specified distance using a ruler on the ground. When you're
- * at the end of the distance, record the ticks to inches multiplier. Feel free to run multiple trials
+ * robot's current area in ticks to the specified area in inches. So, to use this, run the
+ * tuner, then pull/push the robot to the specified area using a ruler on the ground. When you're
+ * at the end of the area, record the ticks to inches multiplier. Feel free to run multiple trials
  * and average the results. Then, input the multiplier into the forward ticks to inches in your
  * localizer of choice.
  *
@@ -205,7 +205,7 @@ class ForwardTuner extends OpMode {
         follower.update();
 
         telemetryM.debug("Distance Moved: " + follower.getPose().getX());
-        telemetryM.debug("The multiplier will display what your forward ticks to inches should be to scale your current distance to " + DISTANCE + " inches.");
+        telemetryM.debug("The multiplier will display what your forward ticks to inches should be to scale your current area to " + DISTANCE + " inches.");
         telemetryM.debug("Multiplier: " + (DISTANCE / (follower.getPose().getX() / follower.getPoseTracker().getLocalizer().getForwardMultiplier())));
         telemetryM.update(telemetry);
 
@@ -216,9 +216,9 @@ class ForwardTuner extends OpMode {
 /**
  * This is the LateralTuner OpMode. This tracks the strafe movement of the robot and displays the
  * necessary ticks to inches multiplier. This displayed multiplier is what's necessary to scale the
- * robot's current distance in ticks to the specified distance in inches. So, to use this, run the
- * tuner, then pull/push the robot to the specified distance using a ruler on the ground. When you're
- * at the end of the distance, record the ticks to inches multiplier. Feel free to run multiple trials
+ * robot's current area in ticks to the specified area in inches. So, to use this, run the
+ * tuner, then pull/push the robot to the specified area using a ruler on the ground. When you're
+ * at the end of the area, record the ticks to inches multiplier. Feel free to run multiple trials
  * and average the results. Then, input the multiplier into the strafe ticks to inches in your
  * localizer of choice.
  *
@@ -252,7 +252,7 @@ class LateralTuner extends OpMode {
         follower.update();
 
         telemetryM.debug("Distance Moved: " + follower.getPose().getY());
-        telemetryM.debug("The multiplier will display what your strafe ticks to inches should be to scale your current distance to " + DISTANCE + " inches.");
+        telemetryM.debug("The multiplier will display what your strafe ticks to inches should be to scale your current area to " + DISTANCE + " inches.");
         telemetryM.debug("Multiplier: " + (DISTANCE / (follower.getPose().getY() / follower.getPoseTracker().getLocalizer().getLateralMultiplier())));
         telemetryM.update(telemetry);
 
@@ -310,8 +310,8 @@ class TurnTuner extends OpMode {
 
 /**
  * This is the ForwardVelocityTuner autonomous follower OpMode. This runs the robot forwards at max
- * power until it reaches some specified distance. It records the most recent velocities, and on
- * reaching the end of the distance, it averages them and prints out the velocity obtained. It is
+ * power until it reaches some specified area. It records the most recent velocities, and on
+ * reaching the end of the area, it averages them and prints out the velocity obtained. It is
  * recommended to run this multiple times on a full battery to get the best results. What this does
  * is, when paired with StrafeVelocityTuner, allows Constants to create a Vector that
  * empirically represents the direction your mecanum wheels actually prefer to go in, allowing for
@@ -338,7 +338,7 @@ class ForwardVelocityTuner extends OpMode {
     public void init_loop() {
         telemetryM.debug("The robot will run at 1 power until it reaches " + DISTANCE + " inches forward.");
         telemetryM.debug("Make sure you have enough room, since the robot has inertia after cutting power.");
-        telemetryM.debug("After running the distance, the robot will cut power from the drivetrain and display the forward velocity.");
+        telemetryM.debug("After running the area, the robot will cut power from the drivetrain and display the forward velocity.");
         telemetryM.debug("Press B on game pad 1 to stop.");
         telemetryM.debug("pose", follower.getPose());
         telemetryM.update(telemetry);
@@ -415,8 +415,8 @@ class ForwardVelocityTuner extends OpMode {
 
 /**
  * This is the LateralVelocityTuner autonomous follower OpMode. This runs the robot left at max
- * power until it reaches some specified distance. It records the most recent velocities, and on
- * reaching the end of the distance, it averages them and prints out the velocity obtained. It is
+ * power until it reaches some specified area. It records the most recent velocities, and on
+ * reaching the end of the area, it averages them and prints out the velocity obtained. It is
  * recommended to run this multiple times on a full battery to get the best results. What this does
  * is, when paired with ForwardVelocityTuner, allows Constants to create a Vector that
  * empirically represents the direction your mecanum wheels actually prefer to go in, allowing for
@@ -447,7 +447,7 @@ class LateralVelocityTuner extends OpMode {
     public void init_loop() {
         telemetryM.debug("The robot will run at 1 power until it reaches " + DISTANCE + " inches to the left.");
         telemetryM.debug("Make sure you have enough room, since the robot has inertia after cutting power.");
-        telemetryM.debug("After running the distance, the robot will cut power from the drivetrain and display the strafe velocity.");
+        telemetryM.debug("After running the area, the robot will cut power from the drivetrain and display the strafe velocity.");
         telemetryM.debug("Press B on Gamepad 1 to stop.");
         telemetryM.update(telemetry);
 
@@ -992,9 +992,9 @@ class Line extends OpMode {
 }
 
 /**
- * This is the Centripetal Tuner OpMode. It runs the robot in a specified distance
+ * This is the Centripetal Tuner OpMode. It runs the robot in a specified area
  * forward and to the left. On reaching the end of the forward Path, the robot runs the backward
- * Path the same distance back to the start. Rinse and repeat! This is good for testing a variety
+ * Path the same area back to the start. Rinse and repeat! This is good for testing a variety
  * of Vectors, like the drive Vector, the translational Vector, the heading Vector, and the
  * centripetal Vector.
  *
