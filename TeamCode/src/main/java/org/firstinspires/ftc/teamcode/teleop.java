@@ -36,6 +36,7 @@ public class teleop extends LinearOpMode {
 
         // declare subassembly classes
         Training Train = new Training();
+        Launcher Launcher = new Launcher();
         Intake Intake = new Intake();
         ServoTraining Servo = new ServoTraining();
 //        Limelight LL = new Limelight();
@@ -44,6 +45,7 @@ public class teleop extends LinearOpMode {
         // initialize subassembly classes
         Train.init(this);
         Intake.init(this);
+        Launcher.init(this);
         Servo.init(this);
 //        LL.init(this);
         Color.init(this);
@@ -96,7 +98,7 @@ public class teleop extends LinearOpMode {
 
 
 
-            //intalise speed as a varible
+            //initialize speed as a variable
             telemetry.addData("Speed: ", speed);
             telemetry.update();
 
@@ -107,25 +109,53 @@ public class teleop extends LinearOpMode {
 //            }
 
             // intake control
-            if (gamepad2.right_stick_y > .4) {
+            if (gamepad2.left_stick_y > .4) {
                 // grab ball
-                Intake.intake();
-            } else if (gamepad2.right_stick_y < -.4) {
+                Intake.intake(1);
+            } else if (gamepad2.left_stick_y < -.4) {
                 // expel ball
                 Intake.reverse();
+            } else if (gamepad2.left_stick_x > .4) {
+                Intake.stop();
+            } else if (gamepad2.left_stick_x < -.4) {
+                Intake.stop();
+            } else {
+                Intake.intake(.4);
+            }
+            if (gamepad2.dpad_down) {
+                // grab ball
+                Intake.intake(1);
+            } else if (gamepad2.dpad_up) {
+                // expel ball
+                Intake.reverse();
+            } else if (gamepad2.dpad_left) {
+                Intake.stop();
+            } else if (gamepad2.dpad_right) {
+                Intake.intake(.4);
             } else {
                 Intake.stop();
             }
 
-            //speed control
-            //decress drive speed varible
+            // launcher control
+            if (gamepad2.right_stick_y < -.4) {
+                Launcher.manualLauncher();
+            } else if (newGamePad2.a.state) {
+                Launcher.manualLauncher();
+            } else {
+                Launcher.stop();
+            }
+
+
+
+            // speed control
+            // decrease drive speed variable
             if (newGamePad1.left_bumper.released) {
                 // when left bumper is pressed, slows down movement universally
                 speed -= (0.1);
                 if (speed <= 0.1) {
                     speed = 0.1;
                 }
-            //increse speed varibal
+            //increase speed variable
             } else if (newGamePad1.right_bumper.released) {
                 // when right bumper is pressed, speeds up movement universally
                 speed += (0.1);

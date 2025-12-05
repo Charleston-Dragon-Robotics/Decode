@@ -36,9 +36,9 @@ public class Intake {
 
     }
     //creates intake functions
-    public void intake(){
+    public void intake(double speed){
         // when intake is called, moves the motor forward with power value 1
-        IntakeM.setPower(1);
+        IntakeM.setPower(speed);
     }
     public void reverse(){
         // when intake is called, moves the motor reverse with power value 1
