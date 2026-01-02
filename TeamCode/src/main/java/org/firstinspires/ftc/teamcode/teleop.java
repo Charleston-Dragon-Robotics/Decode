@@ -115,7 +115,7 @@ public class teleop extends LinearOpMode {
                 Intake.intake(speed);
             } else if (gamepad2.left_stick_y > .4 || gamepad2.dpad_up) {
                 // expel ball
-                Intake.reverse();
+                Intake.reverse(speed);
             } else if (gamepad2.left_stick_x > .4 || gamepad2.dpad_left) {
                 Intake.stop();
             } else if (gamepad2.left_stick_x < -.4 || gamepad2.dpad_right) {

@@ -27,7 +27,7 @@ public class Intake {
 
 
         // sets the motors direction
-        IntakeM.setDirection(DcMotorSimple.Direction.REVERSE);
+        IntakeM.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
         // sets power to 0 to make sure nothing moves at first
@@ -40,9 +40,9 @@ public class Intake {
         // when intake is called, moves the motor forward with power value 1
         IntakeM.setPower(speed);
     }
-    public void reverse(){
+    public void reverse(double speed){
         // when intake is called, moves the motor reverse with power value 1
-        IntakeM.setPower(-1);
+        IntakeM.setPower(-speed);
     }
     public void stop(){
         // stops the intake, obviously
