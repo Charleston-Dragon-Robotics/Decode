@@ -112,7 +112,7 @@ public class teleop extends LinearOpMode {
             // intake control
             if (gamepad2.left_stick_y < -.4 || gamepad2.dpad_down) {
                 // grab ball
-                Intake.intake(.75);
+                Intake.intake(speed);
             } else if (gamepad2.left_stick_y > .4 || gamepad2.dpad_up) {
                 // expel ball
                 Intake.reverse();
