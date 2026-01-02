@@ -44,7 +44,7 @@ public class Auto extends LinearOpMode {
 
     public static Follower follower;
     static PoseHistory poseHistory;
-    private Timer pathTimer, opModeTimer;
+    private Timer pathTimer, opModeTimer,actionTimer;
 
     public enum PathState{
        // START POSITION I GUESS ALSO END POSITION I DONT KNOW WHAT THIS GUY IS TALKING ABOUT
