@@ -39,9 +39,9 @@ public class Launcher {
         RLM.setVelocity(3000);
     }
 
-    public void manualLauncher(){
-        RLM.setPower(1);
-        LLM.setPower(1);
+    public void manualLauncher(double speed){
+        RLM.setPower(speed);
+        LLM.setPower(speed);
     }
 
     public void getV() {

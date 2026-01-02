@@ -126,9 +126,9 @@ public class teleop extends LinearOpMode {
 
             // launcher control
             if (gamepad2.right_stick_y < -.4) {
-                Launcher.manualLauncher();
+                Launcher.manualLauncher(speed);
             } else if (newGamePad2.a.state) {
-                Launcher.manualLauncher();
+                Launcher.manualLauncher(speed);
             } else {
                 Launcher.stop();
             }
@@ -137,14 +137,14 @@ public class teleop extends LinearOpMode {
 
             // speed control
             // decrease drive speed variable
-            if (newGamePad1.left_bumper.released) {
+            if (newGamePad2.left_bumper.released) {
                 // when left bumper is pressed, slows down movement universally
                 speed -= (0.1);
                 if (speed <= 0.1) {
                     speed = 0.1;
                 }
             //increase speed variable
-            } else if (newGamePad1.right_bumper.released) {
+            } else if (newGamePad2.right_bumper.released) {
                 // when right bumper is pressed, speeds up movement universally
                 speed += (0.1);
                 if (speed >= 1) {
