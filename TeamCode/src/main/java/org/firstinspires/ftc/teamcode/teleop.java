@@ -17,9 +17,6 @@ import org.firstinspires.ftc.teamcode.GamepadStates;
 
 import java.util.List;
 
-// this too
-
-
 @TeleOp(name = "Teleop", group = "Teleop")
 // this is the thing that we run
 public class teleop extends LinearOpMode {
@@ -38,19 +35,22 @@ public class teleop extends LinearOpMode {
         Training Train = new Training();
         Launcher Launcher = new Launcher();
         Intake Intake = new Intake();
-        ServoTraining Servo = new ServoTraining();
-//        Limelight LL = new Limelight();
-        Color Color = new Color();
+
+        // Is this still/will be needed?
+//        ServoTraining Servo = new ServoTraining();
+
+////        Limelight LL = new Limelight();
+//        Color Color = new Color();
 
         // initialize subassembly classes
         Train.init(this);
         Intake.init(this);
         Launcher.init(this);
-        Servo.init(this);
+//        Servo.init(this);
 //        LL.init(this);
-        Color.init(this);
-        //List fiducialResult;
+//        Color.init(this);
 
+        //List fiducialResult;
 
         //limelight = hardwareMap.get(Limelight3A.class, "limelight");
 //        telemetry.setMsTransmissionInterval(11);
@@ -71,7 +71,6 @@ public class teleop extends LinearOpMode {
             newGamePad1.updateState();
             newGamePad2.updateState();
 
-
 //            LL.detectPattern();
 
             // controls movement
@@ -82,8 +81,10 @@ public class teleop extends LinearOpMode {
                 // backwards
                 Train.backwards(speed);
             } else if (gamepad1.left_stick_x <-.4) {
+                // Strafe left
                 Train.StraffLeft(speed);
             } else if (gamepad1.left_stick_x > .4) {
+                // Strafe right
                 Train.StraffRight(speed);
             }else if (gamepad1.right_stick_x < -.4) {
                 // left
@@ -109,29 +110,16 @@ public class teleop extends LinearOpMode {
 //            }
 
             // intake control
-            if (gamepad2.left_stick_y > .4) {
+            if (gamepad2.left_stick_y < -.4 || gamepad2.dpad_down) {
                 // grab ball
-                Intake.intake(1);
-            } else if (gamepad2.left_stick_y < -.4) {
+                Intake.intake(.75);
+            } else if (gamepad2.left_stick_y > .4 || gamepad2.dpad_up) {
                 // expel ball
                 Intake.reverse();
-            } else if (gamepad2.left_stick_x > .4) {
+            } else if (gamepad2.left_stick_x > .4 || gamepad2.dpad_left) {
                 Intake.stop();
-            } else if (gamepad2.left_stick_x < -.4) {
+            } else if (gamepad2.left_stick_x < -.4 || gamepad2.dpad_right) {
                 Intake.stop();
-            } else {
-                Intake.intake(.4);
-            }
-            if (gamepad2.dpad_down) {
-                // grab ball
-                Intake.intake(1);
-            } else if (gamepad2.dpad_up) {
-                // expel ball
-                Intake.reverse();
-            } else if (gamepad2.dpad_left) {
-                Intake.stop();
-            } else if (gamepad2.dpad_right) {
-                Intake.intake(.4);
             } else {
                 Intake.stop();
             }

@@ -27,8 +27,8 @@ public class Launcher {
         RLM = (DcMotorEx) hwmap.dcMotor.get("RLM");
 
 
-        LLM.setDirection(DcMotorSimple.Direction.REVERSE);
-        RLM.setDirection(DcMotorSimple.Direction.FORWARD);
+        LLM.setDirection(DcMotorSimple.Direction.FORWARD);
+        RLM.setDirection(DcMotorSimple.Direction.REVERSE);
 
         LLM.setPower(0);
         RLM.setPower(0);
