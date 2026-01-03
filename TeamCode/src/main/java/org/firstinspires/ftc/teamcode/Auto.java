@@ -32,10 +32,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Training;
 import org.firstinspires.ftc.teamcode.GamepadStates;
-import org.firstinspires.ftc.teamcode.Intake;
+//import org.firstinspires.ftc.teamcode.Intake;
 import org.firstinspires.ftc.teamcode.Outtake;
 import org.firstinspires.ftc.teamcode.SensorTraining;
-import org.firstinspires.ftc.teamcode.ServoTraining;
+//import org.firstinspires.ftc.teamcode.ServoTraining;
 import org.firstinspires.ftc.teamcode.Limelight;
 import org.firstinspires.ftc.teamcode.Functions;
 
