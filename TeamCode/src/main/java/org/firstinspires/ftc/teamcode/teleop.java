@@ -125,10 +125,8 @@ public class teleop extends LinearOpMode {
             }
 
             // launcher control
-            if (gamepad2.right_stick_y < -.4) {
-                Launcher.manualLauncher();
-            } else if (newGamePad2.a.state) {
-                Launcher.manualLauncher();
+            if (gamepad2.right_stick_y < -.4 ||newGamePad2.a.state) {
+                Launcher.manualLauncher(speed);
             } else {
                 Launcher.stop();
             }
