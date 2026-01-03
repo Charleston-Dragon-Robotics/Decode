@@ -36,9 +36,9 @@ public class Intake {
 
     }
     //creates intake functions
-    public void intake(double speed){
+    public void intake(){
         // when intake is called, moves the motor forward with power value 1
-        IntakeM.setPower(speed);
+        IntakeM.setPower(.75);
     }
     public void reverse(){
         // when intake is called, moves the motor reverse with power value 1
@@ -47,5 +47,9 @@ public class Intake {
     public void stop(){
         // stops the intake, obviously
         IntakeM.setPower(0);
+    }
+    public void sort(){
+        //allows to sort artifacts
+        IntakeM.setPower(.65);
     }
 }

@@ -46,11 +46,49 @@ public class Auto extends LinearOpMode {
     static PoseHistory poseHistory;
     private Timer pathTimer, opModeTimer,actionTimer;
 
-    public enum PathState{
-       // START POSITION I GUESS ALSO END POSITION I DONT KNOW WHAT THIS GUY IS TALKING ABOUT
-        // DRIVE > MOVEMENT
+    private int pathState;
+
+    boolean isLeft = false;
+    boolean isBlue = false;
+
+    private final Pose start= new Pose(63,7,Math.toRadians(180));
+    private final Pose score= new Pose(31,110,Math.toRadians(135));
+    private final Pose point1= new Pose(63,7,Math.toRadians(90));
+    private final Pose point2= new Pose(63,7,Math.toRadians(90));
+
+    private PathChain scorePre, grab1, score1;
+
+    public void buildPaths(){
+        scorePre=follower.pathBuilder()
+                .addPath(new BezierLine(start, score))
+                .setLinearHeadingInterpolation(start.getHeading(), score.getHeading())
+                .build();
     }
 
+    public void autoPathing(){
+        switch (pathState){
+            case 0:
+                follower.followPath(scorePre);
+                setPathState(1);
+                break;
+//            case 1:
+//                if (!follower.isBusy()){
+//
+//                }
+        }
+    }
+
+    public void setPathState(int pState){
+        pathState = pState;
+        pathTimer.resetTimer();
+        pathTimer = new Timer();
+        opModeTimer = new Timer();
+        opModeTimer.resetTimer();
+
+        follower = Constants.createFollower(hardwareMap);
+        buildPaths();
+        follower.setStartingPose(start);
+    }
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -75,16 +113,20 @@ public class Auto extends LinearOpMode {
 //
 //        poseHistory = follower.getPoseHistory();
 //
+
         //code for the auto phase
         waitForStart();
-//
+        opModeTimer.resetTimer();
+        setPathState(0);
+
+        //
 //        Fun.forwardForDist(12, .5);
 
-        while (opModeIsActive()) {
-        Drive.forward(1);
-        sleep(500);
-        Drive.stop();
-        break;
-        }
+//        while (opModeIsActive()) {
+//        Drive.forward(1);
+//        sleep(500);
+//        Drive.stop();
+//        break;
+//        }
     }
 }
