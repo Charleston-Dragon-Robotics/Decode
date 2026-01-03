@@ -20,6 +20,7 @@ public class Functions {
     private LinearOpMode opmode = null;
 
     Training Drive = new Training();
+    Intake intake = new Intake();
 
 
 
@@ -32,12 +33,19 @@ public class Functions {
 
     }
 //creates function
-    public void forwardForDist(double target, double speed) {
-        while (Math.abs(follower.getPose().getX()) < target) {
-            Drive.forward(speed);
-        }
-        Drive.stop();
+//    public void forwardForDist(double target, double speed) {
+//        while (Math.abs(follower.getPose().getX()) < target) {
+//            Drive.forward(speed);
+//        }
+//        Drive.stop();
+//    }
+
+    public void cycle (int Balls){
+        intake.intake(.65);
+        opmode.sleep(250 * Balls);
+        intake.stop();
     }
+
 }
 
 //    if(Math.abs(follower.getPose().
