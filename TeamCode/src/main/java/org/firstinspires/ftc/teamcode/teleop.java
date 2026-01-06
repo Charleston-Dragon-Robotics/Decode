@@ -63,6 +63,7 @@ public class teleop extends LinearOpMode {
 //        LL.getStatus();
 
         double speed = 0.5;
+        double power = 0.5;
 
         waitForStart();
 
@@ -126,13 +127,17 @@ public class teleop extends LinearOpMode {
 
             // launcher control
             if (gamepad2.right_stick_y < -.4) {
-                Launcher.manualLauncher(speed);
+                Launcher.manualLauncher(power);
             } else if (newGamePad2.a.state) {
-                Launcher.manualLauncher(speed);
+                Launcher.manualLauncher(power);
             } else {
                 Launcher.stop();
             }
-
+            if (newGamePad2.b.state){
+                Intake.Feed();
+            }else {
+                Intake.FeedStop();
+            }
 
 
             // speed control
@@ -149,6 +154,21 @@ public class teleop extends LinearOpMode {
                 speed += (0.1);
                 if (speed >= 1) {
                     speed = (1);
+                }
+            }
+
+            if (newGamePad2.left_trigger.released) {
+                // when left bumper is pressed, slows down movement universally
+                power -= (0.1);
+                if (power <= 0.1) {
+                    power = 0.1;
+                }
+                //increase speed variable
+            } else if (newGamePad2.right_trigger.released) {
+                // when right bumper is pressed, speeds up movement universally
+                power += (0.1);
+                if (power >= 1) {
+                    power = (1);
                 }
             }
 //            LLResult result = limelight.getLatestResult();

@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.SensorColor;
 public class Intake {
     //creates motor
     private DcMotor IntakeM = null;
+    private DcMotor FeederM = null;
     private LinearOpMode opmode = null;
 
     public Intake() {
@@ -24,14 +25,17 @@ public class Intake {
 
         //names the motor
         IntakeM = hwMap.dcMotor.get("IntakeM");
+        FeederM = hwMap.dcMotor.get("FeederM");
 
 
         // sets the motors direction
+        IntakeM.setDirection(DcMotorSimple.Direction.FORWARD);
         IntakeM.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
         // sets power to 0 to make sure nothing moves at first
         IntakeM.setPower(0);
+        FeederM.setPower(0);
 
 
     }
@@ -47,5 +51,11 @@ public class Intake {
     public void stop(){
         // stops the intake, obviously
         IntakeM.setPower(0);
+    }
+    public void Feed(){
+        FeederM.setPower(1);
+    }
+    public void FeedStop(){
+        FeederM.setPower(0);
     }
 }
