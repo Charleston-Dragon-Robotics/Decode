@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import static java.lang.Thread.sleep;
+
 import com.pedropathing.Drivetrain;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -20,6 +22,7 @@ public class Functions {
     private LinearOpMode opmode = null;
 
     Training Drive = new Training();
+    Intake intake = new Intake();
 
 
 
@@ -37,6 +40,13 @@ public class Functions {
             Drive.forward(speed);
         }
         Drive.stop();
+    }
+
+
+    public void sort (){
+        intake.intake(0.6);
+        opmode.sleep(500);
+        intake.stop();
     }
 }
 

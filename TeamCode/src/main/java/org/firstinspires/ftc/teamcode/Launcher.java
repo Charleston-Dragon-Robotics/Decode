@@ -32,6 +32,8 @@ public class Launcher {
 
         LLM.setPower(0);
         RLM.setPower(0);
+
+        double velocity = LLM.getVelocity();
     }
 
     public void autoLaunch() {
@@ -42,10 +44,10 @@ public class Launcher {
     public void manualLauncher(double speed){
         RLM.setPower(speed);
         LLM.setPower(speed);
+        getV();
     }
 
     public void getV() {
-        RLM.setPower(1);
         opmode.telemetry.addLine("Velocity: " + RLM.getVelocity());
         opmode.telemetry.update();
     }

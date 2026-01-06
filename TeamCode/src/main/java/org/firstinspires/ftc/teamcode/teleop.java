@@ -35,6 +35,7 @@ public class teleop extends LinearOpMode {
         Training Train = new Training();
         Launcher Launcher = new Launcher();
         Intake Intake = new Intake();
+        Functions Fun = new Functions();
 
         // Is this still/will be needed?
 //        ServoTraining Servo = new ServoTraining();
@@ -46,6 +47,7 @@ public class teleop extends LinearOpMode {
         Train.init(this);
         Intake.init(this);
         Launcher.init(this);
+        Fun.init(this);
 //        Servo.init(this);
 //        LL.init(this);
 //        Color.init(this);
@@ -63,7 +65,6 @@ public class teleop extends LinearOpMode {
 //        LL.getStatus();
 
         double speed = 0.5;
-        double power = 0.5;
 
         waitForStart();
 
@@ -81,13 +82,13 @@ public class teleop extends LinearOpMode {
             } else if (gamepad1.left_stick_y > .4) {
                 // backwards
                 Train.backwards(speed);
-            } else if (gamepad1.left_stick_x <-.4) {
+            } else if (gamepad1.left_stick_x < -.4) {
                 // Strafe left
                 Train.StraffLeft(speed);
             } else if (gamepad1.left_stick_x > .4) {
                 // Strafe right
                 Train.StraffRight(speed);
-            }else if (gamepad1.right_stick_x < -.4) {
+            } else if (gamepad1.right_stick_x < -.4) {
                 // left
                 Train.left(speed);
             } else if (gamepad1.right_stick_x > .4) {
@@ -97,7 +98,6 @@ public class teleop extends LinearOpMode {
                 // run the stop function from training
                 Train.stop();
             }
-
 
 
             //initialize speed as a variable
@@ -113,23 +113,21 @@ public class teleop extends LinearOpMode {
             // intake control
             if (gamepad2.left_stick_y < -.4 || gamepad2.dpad_down) {
                 // grab ball
-                Intake.intake(speed);
+                Intake.intake(0.75);
             } else if (gamepad2.left_stick_y > .4 || gamepad2.dpad_up) {
                 // expel ball
-                Intake.reverse(speed);
-            } else if (gamepad2.left_stick_x > .4 || gamepad2.dpad_left) {
-                Intake.stop();
-            } else if (gamepad2.left_stick_x < -.4 || gamepad2.dpad_right) {
-                Intake.stop();
+                Intake.reverse(0.75);
+            } else if (newGamePad2.y.state) {
+                Fun.sort();
             } else {
                 Intake.stop();
             }
 
             // launcher control
             if (gamepad2.right_stick_y < -.4) {
-                Launcher.manualLauncher(power);
+                Launcher.manualLauncher(0.35);
             } else if (newGamePad2.a.state) {
-                Launcher.manualLauncher(power);
+                Launcher.manualLauncher(0.55);
             } else {
                 Launcher.stop();
             }
@@ -140,16 +138,17 @@ public class teleop extends LinearOpMode {
             }
 
 
+
             // speed control
             // decrease drive speed variable
-            if (newGamePad2.left_bumper.released) {
+            if (newGamePad1.left_bumper.released) {
                 // when left bumper is pressed, slows down movement universally
                 speed -= (0.1);
                 if (speed <= 0.1) {
                     speed = 0.1;
                 }
             //increase speed variable
-            } else if (newGamePad2.right_bumper.released) {
+            } else if (newGamePad1.right_bumper.released) {
                 // when right bumper is pressed, speeds up movement universally
                 speed += (0.1);
                 if (speed >= 1) {
@@ -157,20 +156,6 @@ public class teleop extends LinearOpMode {
                 }
             }
 
-            if (newGamePad2.left_trigger.released) {
-                // when left bumper is pressed, slows down movement universally
-                power -= (0.1);
-                if (power <= 0.1) {
-                    power = 0.1;
-                }
-                //increase speed variable
-            } else if (newGamePad2.right_trigger.released) {
-                // when right bumper is pressed, speeds up movement universally
-                power += (0.1);
-                if (power >= 1) {
-                    power = (1);
-                }
-            }
 //            LLResult result = limelight.getLatestResult();
 //            LL.getResult();
         }
