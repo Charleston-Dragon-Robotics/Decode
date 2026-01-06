@@ -40,8 +40,8 @@ public class Launcher {
     }
 
     public void manualLauncher(double speed){
-        RLM.setPower(speed);
-        LLM.setPower(speed);
+        RLM.setVelocity(speed);
+        LLM.setVelocity(speed);
     }
 
     public void getV() {
