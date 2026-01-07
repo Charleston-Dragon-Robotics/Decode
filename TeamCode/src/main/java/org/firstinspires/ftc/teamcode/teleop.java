@@ -63,6 +63,7 @@ public class teleop extends LinearOpMode {
 //        LL.getStatus();
 
         double speed = 0.5;
+        boolean anyDirection = false;
 
         waitForStart();
 
@@ -72,29 +73,30 @@ public class teleop extends LinearOpMode {
             newGamePad2.updateState();
 
 //            LL.detectPattern();
-
-            // controls movement
-            if (gamepad1.left_stick_y < -.4) {
-                // run the forward function from Functions program
-                Train.forward(speed);
-            } else if (gamepad1.left_stick_y > .4) {
-                // backwards
-                Train.backwards(speed);
-            } else if (gamepad1.left_stick_x <-.4) {
-                // Strafe left
-                Train.StraffLeft(speed);
-            } else if (gamepad1.left_stick_x > .4) {
-                // Strafe right
-                Train.StraffRight(speed);
-            }else if (gamepad1.right_stick_x < -.4) {
-                // left
-                Train.left(speed);
-            } else if (gamepad1.right_stick_x > .4) {
-                // right
-                Train.right(speed);
-            } else {
-                // run the stop function from training
-                Train.stop();
+            if (anyDirection == false) {
+                // controls movement
+                if (gamepad1.left_stick_y < -.4) {
+                    // run the forward function from Functions program
+                    Train.forward(speed);
+                } else if (gamepad1.left_stick_y > .4) {
+                    // backwards
+                    Train.backwards(speed);
+                } else if (gamepad1.left_stick_x < -.4) {
+                    // Strafe left
+                    Train.StraffLeft(speed);
+                } else if (gamepad1.left_stick_x > .4) {
+                    // Strafe right
+                    Train.StraffRight(speed);
+                } else if (gamepad1.right_stick_x < -.4) {
+                    // left
+                    Train.left(speed);
+                } else if (gamepad1.right_stick_x > .4) {
+                    // right
+                    Train.right(speed);
+                } else {
+                    // run the stop function from training
+                    Train.stop();
+                }
             }
 
 
@@ -131,6 +133,11 @@ public class teleop extends LinearOpMode {
                 Launcher.stop();
             }
 
+            if(newGamePad2.a.released) {
+                if( anyDirection== true) {
+                     = false;
+                }
+            }
 
 
             // speed control
