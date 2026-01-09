@@ -133,9 +133,11 @@ public class teleop extends LinearOpMode {
                 Launcher.stop();
             }
 
-            if(newGamePad2.a.released) {
+            if(newGamePad1.a.released) {
                 if( anyDirection== true) {
-                     = false;
+                    anyDirection = false;
+                }else {
+                    anyDirection =true;
                 }
             }
 

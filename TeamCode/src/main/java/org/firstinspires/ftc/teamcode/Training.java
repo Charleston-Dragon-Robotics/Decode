@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Training {
 
 //    Create motor objects here
-    private DcMotor FrontRM = null;
+    public DcMotor FrontRM = null;
     private DcMotor FrontLM = null;
     private DcMotor BackRM = null;
     private DcMotor BackLM = null;
