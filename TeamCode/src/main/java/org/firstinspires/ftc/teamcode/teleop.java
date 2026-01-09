@@ -64,6 +64,7 @@ public class teleop extends LinearOpMode {
 
         double speed = 0.5;
         double power = 0.5;
+        double velocity;
 
         waitForStart();
 
@@ -81,13 +82,13 @@ public class teleop extends LinearOpMode {
             } else if (gamepad1.left_stick_y > .4) {
                 // backwards
                 Train.backwards(speed);
-            } else if (gamepad1.left_stick_x <-.4) {
+            } else if (gamepad1.left_stick_x < -.4) {
                 // Strafe left
                 Train.StraffLeft(speed);
             } else if (gamepad1.left_stick_x > .4) {
                 // Strafe right
                 Train.StraffRight(speed);
-            }else if (gamepad1.right_stick_x < -.4) {
+            } else if (gamepad1.right_stick_x < -.4) {
                 // left
                 Train.left(speed);
             } else if (gamepad1.right_stick_x > .4) {
@@ -99,9 +100,9 @@ public class teleop extends LinearOpMode {
             }
 
 
-
             //initialize speed as a variable
             telemetry.addData("Speed: ", speed);
+            telemetry.addData("Power ", power);
             telemetry.update();
 
 //            if (Color.isGreen()) {
@@ -125,18 +126,23 @@ public class teleop extends LinearOpMode {
                 Intake.stop();
             }
 
+            velocity = Launcher.getV();
             // launcher control
             if (gamepad2.right_stick_y < -.4) {
-                Launcher.manualLauncher(0);
+                Launcher.manualLauncher(.35);
+                Intake.Feed(.35);
+                Intake.intake(.35);
+                telemetry.addData("velocity", velocity);
+                telemetry.update();
             } else if (newGamePad2.a.state) {
-                Launcher.manualLauncher(0);
+                Launcher.manualLauncher(.55);
+                Intake.Feed(1);
+                Intake.intake(.55);
+                telemetry.addData("velocity", velocity);
+                telemetry.update();
             } else {
                 Launcher.stop();
-            }
-            if (newGamePad2.b.state){
-                Intake.Feed();
-            }else {
-                Intake.FeedStop();
+                Intake.stop();
             }
 
 
@@ -148,7 +154,7 @@ public class teleop extends LinearOpMode {
                 if (speed <= 0.1) {
                     speed = 0.1;
                 }
-            //increase speed variable
+                //increase speed variable
             } else if (newGamePad2.right_bumper.released) {
                 // when right bumper is pressed, speeds up movement universally
                 speed += (0.1);

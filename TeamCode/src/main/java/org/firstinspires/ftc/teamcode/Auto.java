@@ -57,7 +57,7 @@ public class Auto extends LinearOpMode {
         // declare subassembly classes
         Training Drive = new Training();
 //        Intake Intake = new Intake();
-//        Outtake Outtake = new Outtake();
+        Launcher Launch = new Launcher();
 //        SensorTraining Sensor = new SensorTraining();
 //        ServoTraining Servo = new ServoTraining();
 //        Limelight Limelight = new Limelight();
@@ -81,9 +81,18 @@ public class Auto extends LinearOpMode {
 //        Fun.forwardForDist(12, .5);
 
         while (opModeIsActive()) {
-        Drive.forward(1);
-        sleep(500);
-        Drive.stop();
+//        Drive.forward(1);
+//        sleep(500);
+//        Drive.stop();
+            Drive.backwards(1);
+            sleep(500);
+            Drive.stop();
+            Launch.autoLaunch();
+            sleep(500);
+            Launch.stop();
+            Drive.StraffLeft(.5);
+            sleep(500);
+            Drive.stop();
         break;
         }
     }

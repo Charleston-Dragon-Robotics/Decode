@@ -17,6 +17,9 @@ public class Launcher {
     public Launcher() {
     }
 
+    Intake Intake = new Intake();
+
+
     public void init(LinearOpMode opMode) {
         HardwareMap hwmap;
 
@@ -35,19 +38,20 @@ public class Launcher {
     }
 
     public void autoLaunch() {
-        RLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RLM.setVelocity(3000);
+        LLM.setPower(3000);
+        RLM.setPower(3000);
+        Intake.Launch(1,1);
     }
 
-    public void manualLauncher(double speed){
-        RLM.setVelocity(speed);
-        LLM.setVelocity(speed);
+    public void manualLauncher(double speed) {
+        RLM.setPower(speed);
+        LLM.setPower(speed);
+        Intake.FeederM.setPower(1);
+        getV();
     }
 
-    public void getV() {
-        RLM.setPower(1);
-        opmode.telemetry.addLine("Velocity: " + RLM.getVelocity());
-        opmode.telemetry.update();
+    public double getV() {
+        return RLM.getVelocity();
     }
 
     public void resetEncoders() {
@@ -64,7 +68,8 @@ public class Launcher {
         LLM.setPower(0);
         RLM.setPower(0);
     }
-    public void stop(){
+
+    public void stop() {
         RLM.setPower(0);
         LLM.setPower(0);
     }
