@@ -58,4 +58,10 @@ public class Intake {
     public void FeedStop(){
         FeederM.setPower(0);
     }
+
+    public void Launch(double feedSpeed, double intakeSpeed) {
+        FeederM.setPower(feedSpeed);
+        IntakeM.setPower(intakeSpeed);
+    }
+
 }

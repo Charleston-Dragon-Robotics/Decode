@@ -119,25 +119,20 @@ public class teleop extends LinearOpMode {
                 Intake.reverse(0.75);
             } else if (newGamePad2.y.state) {
                 Fun.sort();
-            } else {
-                Intake.stop();
             }
 
             // launcher control
-            if (gamepad2.right_stick_y < -.4) {
+            else if (gamepad2.right_stick_y < -.4) {
                 Launcher.manualLauncher(0.35);
+                Intake.Launch(.35,.35);
             } else if (newGamePad2.a.state) {
                 Launcher.manualLauncher(0.55);
+                Intake.Launch(.55,.55);
             } else {
                 Launcher.stop();
-            }
-            if (newGamePad2.b.state){
-                Intake.Feed();
-            }else {
                 Intake.FeedStop();
+                Intake.stop();
             }
-
-
 
             // speed control
             // decrease drive speed variable

@@ -16,7 +16,7 @@ public class Launcher {
 
     public Launcher() {
     }
-
+    Intake Intake = new Intake();
     public void init(LinearOpMode opMode) {
         HardwareMap hwmap;
 
@@ -34,16 +34,20 @@ public class Launcher {
         RLM.setPower(0);
 
         double velocity = LLM.getVelocity();
+
+        Intake Intake = new Intake();
     }
 
-    public void autoLaunch() {
-        RLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RLM.setVelocity(3000);
+    public void autoLaunch(double power) {
+        RLM.setPower(power);
+        LLM.setPower(power);
+        Intake.Launch(1,1);
     }
 
     public void manualLauncher(double speed){
         RLM.setPower(speed);
         LLM.setPower(speed);
+        Intake.Launch(1,1);
         getV();
     }
 
