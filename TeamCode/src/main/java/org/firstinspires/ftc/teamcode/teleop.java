@@ -18,6 +18,7 @@ import org.firstinspires.ftc.teamcode.GamepadStates;
 
 import java.util.List;
 
+
 // this too
 
 
@@ -49,6 +50,8 @@ public class teleop extends LinearOpMode {
 //        LL.init(this);
         Color.init(this);
         //List fiducialResult;
+
+        boolean isGreen;
 
 
         //limelight = hardwareMap.get(Limelight3A.class, "limelight");
@@ -97,6 +100,7 @@ public class teleop extends LinearOpMode {
             }
 
 
+
 //            Color.HSV();
 
             telemetry.addLine("Is it purple?"+ Color.ispurpleF());
@@ -105,23 +109,8 @@ public class teleop extends LinearOpMode {
 
             //intalise speed as a varible
 //            telemetry.addLine("Speed: "+ speed);
-//            telemetry.update();
 
-//            if (Color.isGreen()) {
-//                relativeLayout.setBackgroundColor(Color.greenV());
-//            } else {
-//                relativeLayout.setBackgroundColor(-1);
-//            }
-
-//            // intake control
-//            if (gamepad2.right_stick_y > .4) {
-//                // grab ball
-//                Intake.intake();
-//            } else if (gamepad2.right_stick_y < -.4) {
-//                // expel ball
-//                Intake.reverse();
-//            } else {
-//                Intake.stop();
+ 
 //            }
 
             //speed control

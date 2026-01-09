@@ -9,10 +9,12 @@ import org.firstinspires.ftc.robotcore.external.JavaUtil;
 public class Color {
     private LinearOpMode opmode = null;
 
+
     com.qualcomm.robotcore.hardware.ColorSensor Color;
     float[] hsv={0F,0F,0F};
 
     String isPurple;
+    public ColorSensor Color;
 
     public Color() {
     }
@@ -54,3 +56,4 @@ public class Color {
         opmode.telemetry.update();
     }
 }
+// this is what happens when ian isnt here and i have to actually try to work on stuff pray for me
