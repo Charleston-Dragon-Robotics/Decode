@@ -72,6 +72,10 @@ public class teleop extends LinearOpMode {
             newGamePad1.updateState();
             newGamePad2.updateState();
 
+            double y = -gamepad1.left_stick_y;
+            double x = gamepad1.left_stick_x;
+            double rx = 
+
 //            LL.detectPattern();
             if (anyDirection == false) {
                 // controls movement

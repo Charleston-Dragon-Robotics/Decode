@@ -9,9 +9,9 @@ public class Training {
 
 //    Create motor objects here
     public DcMotor FrontRM = null;
-    private DcMotor FrontLM = null;
-    private DcMotor BackRM = null;
-    private DcMotor BackLM = null;
+    public DcMotor FrontLM = null;
+    public DcMotor BackRM = null;
+    public DcMotor BackLM = null;
 
 private LinearOpMode opmode = null;
 
