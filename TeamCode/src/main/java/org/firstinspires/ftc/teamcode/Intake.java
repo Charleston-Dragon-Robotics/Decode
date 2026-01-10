@@ -31,6 +31,7 @@ public class Intake {
         // sets the motors direction
         IntakeM.setDirection(DcMotorSimple.Direction.FORWARD);
         IntakeM.setDirection(DcMotorSimple.Direction.FORWARD);
+        FeederM.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         // sets power to 0 to make sure nothing moves at first

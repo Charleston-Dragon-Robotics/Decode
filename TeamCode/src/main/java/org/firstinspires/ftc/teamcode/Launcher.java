@@ -35,19 +35,19 @@ public class Launcher {
 
         double velocity = LLM.getVelocity();
 
-        Intake Intake = new Intake();
+        Intake.init(opMode);
     }
 
     public void autoLaunch(double power) {
         RLM.setPower(power);
         LLM.setPower(power);
-        Intake.Launch(1,1);
+//        Intake.Launch(1,1);
     }
 
     public void manualLauncher(double speed){
         RLM.setPower(speed);
         LLM.setPower(speed);
-        Intake.Launch(1,1);
+//        Intake.Launch(1,1);
         getV();
     }
 

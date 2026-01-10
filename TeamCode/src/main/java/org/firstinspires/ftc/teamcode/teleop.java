@@ -118,13 +118,13 @@ public class teleop extends LinearOpMode {
                 // expel ball
                 Intake.reverse(0.75);
             } else if (newGamePad2.y.state) {
-                Fun.sort();
+               Intake.Launch(.55,.55);
             }
 
             // launcher control
             else if (gamepad2.right_stick_y < -.4) {
-                Launcher.manualLauncher(0.35);
-                Intake.Launch(.35,.35);
+                Launcher.manualLauncher(0.55);
+//                Intake.Launch(.35,.35);
             } else if (newGamePad2.a.state) {
                 Launcher.manualLauncher(0.55);
                 Intake.Launch(.55,.55);

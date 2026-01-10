@@ -56,7 +56,7 @@ public class Auto extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         // declare subassembly classes
         Training Drive = new Training();
-//        Intake Intake = new Intake();
+        Intake Intake = new Intake();
         Launcher Launch = new Launcher();
 //        SensorTraining Sensor = new SensorTraining();
 //        ServoTraining Servo = new ServoTraining();
@@ -65,10 +65,11 @@ public class Auto extends LinearOpMode {
 
         // names subassembly classes
         Drive.init(this);
-//        Intake.init(this);
+        Intake.init(this);
 //        Outtake.init(this);
 //        Servo.init(this);
 //        Limelight.init(this);
+        Launch.init(this);
         Fun.init(this);
 
 //        follower.setStartingPose(new Pose());
@@ -87,11 +88,30 @@ public class Auto extends LinearOpMode {
             Drive.backwards(1);
             sleep(500);
             Drive.stop();
-            Launch.autoLaunch(.35);
             sleep(500);
+            Launch.autoLaunch(.5);
+            sleep(500);
+            Intake.Feed();
+            Intake.intake(.65);
+            sleep(100);
+            Intake.stop();
+            Intake.FeedStop();
+            sleep(400);
+            Intake.Feed();
+            Intake.intake(.65);
+            sleep(175);
+            Intake.stop();
+            Intake.FeedStop();
+            sleep(400);
+            Intake.Feed();
+            Intake.intake(.65);
+            sleep(200);
+            Intake.stop();
+            Intake.FeedStop();
             Launch.stop();
-            Drive.StraffLeft(.5);
             sleep(500);
+            Drive.StraffRight(.5);
+            sleep(750);
             Drive.stop();
 
             break;
