@@ -75,7 +75,15 @@ public class Auto extends LinearOpMode {
 //        follower.setStartingPose(new Pose());
 //
 //        poseHistory = follower.getPoseHistory();
-//
+
+        boolean red = false;
+
+        telemetry.addLine("press B if red alliance");
+
+        GamepadStates newGamPad2 = new GamepadStates(gamepad2);
+
+        if (newGamPad2.b.state)
+
         //code for the auto phase
         waitForStart();
 //
@@ -110,10 +118,15 @@ public class Auto extends LinearOpMode {
             Intake.FeedStop();
             Launch.stop();
             sleep(500);
-            Drive.StraffRight(.5);
-            sleep(750);
-            Drive.stop();
-
+            if(red = true) {
+                Drive.StraffRight(.5);
+                sleep(750);
+                Drive.stop();
+            } else {
+                Drive.StraffLeft(.5);
+                sleep(750);
+                Drive.stop();
+            }
             break;
         }
     }
