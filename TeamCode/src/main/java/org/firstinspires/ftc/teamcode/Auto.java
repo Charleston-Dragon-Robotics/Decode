@@ -82,7 +82,9 @@ public class Auto extends LinearOpMode {
 
         GamepadStates newGamPad2 = new GamepadStates(gamepad2);
 
-        if (newGamPad2.b.state)
+        if (newGamPad2.b.released){
+            red = true;
+        }
 
         //code for the auto phase
         waitForStart();
