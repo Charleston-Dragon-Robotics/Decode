@@ -48,13 +48,9 @@ public class Launcher {
 //        Intake.Launch(1,1);
     }
 
-    public void manualLauncher(double speed){
-//        RLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        LLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RLM.setPower(speed);
-        LLM.setPower(speed);
-//        Intake.Launch(1,1);
-        getV();
+    public void manualLauncher(double power){
+        RLM.setPower(power);
+        LLM.setPower(power);
     }
 
     public void getV() {

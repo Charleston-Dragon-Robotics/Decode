@@ -129,32 +129,8 @@ public class teleop extends LinearOpMode {
             }
 
             // launcher control
-            else if (gamepad2.right_stick_y < -.4) {
-                Train.stop();
-                Launcher.manualLauncher(.5);
-//                Intake.Launch(.35,.35);
-            } else if (newGamePad2.a.state) {
-                Train.stop();
-                Launcher.autoLaunch(.45);
-                sleep(500);
-                Intake.Feed();
-                Intake.intake(.65);
-                sleep(120);
-                Intake.stop();
-                Intake.FeedStop();
-                sleep(400);
-                Intake.Feed();
-                Intake.intake(.65);
-                sleep(185);
-                Intake.stop();
-                Intake.FeedStop();
-                sleep(400);
-                Intake.Feed();
-                Intake.intake(.65);
-                sleep(220);
-                Intake.stop();
-                Intake.FeedStop();
-                Launcher.stop();
+            if (gamepad2.right_stick_y < -.4 ||newGamePad2.a.state) {
+                Launcher.manualLauncher(speed);
             } else {
                 Launcher.stop();
                 Intake.FeedStop();
