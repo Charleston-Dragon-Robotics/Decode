@@ -64,7 +64,7 @@ public class teleop extends LinearOpMode {
 
 //        LL.getStatus();
 
-        double speed = 0.5;
+        double speed = 0.7;
 
         waitForStart();
 
@@ -76,28 +76,35 @@ public class teleop extends LinearOpMode {
 //            LL.detectPattern();
 
             // controls movement
-            if (gamepad1.left_stick_y < -.4) {
-                // run the forward function from Functions program
-                Train.forward(speed);
-            } else if (gamepad1.left_stick_y > .4) {
-                // backwards
-                Train.backwards(speed);
-            } else if (gamepad1.left_stick_x < -.4) {
-                // Strafe left
-                Train.StraffLeft(speed);
-            } else if (gamepad1.left_stick_x > .4) {
-                // Strafe right
-                Train.StraffRight(speed);
-            } else if (gamepad1.right_stick_x < -.4) {
-                // left
-                Train.left(speed);
-            } else if (gamepad1.right_stick_x > .4) {
-                // right
-                Train.right(speed);
+
+            if (gamepad1.left_stick_y !=0 || gamepad1.left_stick_x != 0 || gamepad1.right_stick_x != 0) {
+                Train.multi(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
             } else {
-                // run the stop function from training
                 Train.stop();
             }
+
+//            if (gamepad1.left_stick_y < -.4) {
+//                // run the forward function from Functions program
+//                Train.forward(speed);
+//            } else if (gamepad1.left_stick_y > .4) {
+//                // backwards
+//                Train.backwards(speed);
+//            } else if (gamepad1.left_stick_x < -.4) {
+//                // Strafe left
+//                Train.StraffLeft(speed);
+//            } else if (gamepad1.left_stick_x > .4) {
+//                // Strafe right
+//                Train.StraffRight(speed);
+//            } else if (gamepad1.right_stick_x < -.4) {
+//                // left
+//                Train.left(speed);
+//            } else if (gamepad1.right_stick_x > .4) {
+//                // right
+//                Train.right(speed);
+//            } else {
+//                // run the stop function from training
+//                Train.stop();
+//            }
 
 
             //initialize speed as a variable
@@ -113,7 +120,7 @@ public class teleop extends LinearOpMode {
             // intake control
             if (gamepad2.left_stick_y < -.4 || gamepad2.dpad_down) {
                 // grab ball
-                Intake.intake(0.75);
+                Intake.intake(.9);
             } else if (gamepad2.left_stick_y > .4 || gamepad2.dpad_up) {
                 // expel ball
                 Intake.reverse(0.75);
@@ -123,11 +130,31 @@ public class teleop extends LinearOpMode {
 
             // launcher control
             else if (gamepad2.right_stick_y < -.4) {
-                Launcher.manualLauncher(0.55);
+                Train.stop();
+                Launcher.manualLauncher(.5);
 //                Intake.Launch(.35,.35);
             } else if (newGamePad2.a.state) {
-                Launcher.manualLauncher(0.55);
-                Intake.Launch(.55,.55);
+                Train.stop();
+                Launcher.autoLaunch(.45);
+                sleep(500);
+                Intake.Feed();
+                Intake.intake(.65);
+                sleep(120);
+                Intake.stop();
+                Intake.FeedStop();
+                sleep(400);
+                Intake.Feed();
+                Intake.intake(.65);
+                sleep(185);
+                Intake.stop();
+                Intake.FeedStop();
+                sleep(400);
+                Intake.Feed();
+                Intake.intake(.65);
+                sleep(220);
+                Intake.stop();
+                Intake.FeedStop();
+                Launcher.stop();
             } else {
                 Launcher.stop();
                 Intake.FeedStop();

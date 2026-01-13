@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.health.connect.datatypes.units.Velocity;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -39,12 +41,16 @@ public class Launcher {
     }
 
     public void autoLaunch(double power) {
+//        RLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        LLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RLM.setPower(power);
         LLM.setPower(power);
 //        Intake.Launch(1,1);
     }
 
     public void manualLauncher(double speed){
+//        RLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        LLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RLM.setPower(speed);
         LLM.setPower(speed);
 //        Intake.Launch(1,1);

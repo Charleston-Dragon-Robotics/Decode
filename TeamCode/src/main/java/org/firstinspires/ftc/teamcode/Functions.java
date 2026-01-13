@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import static java.lang.Thread.sleep;
 
 import com.pedropathing.Drivetrain;
+import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -22,8 +23,8 @@ public class Functions {
     private LinearOpMode opmode = null;
 
     Training Drive = new Training();
+//    Limelight LL = new Limelight();
     Intake intake = new Intake();
-
 
 
     public Functions() {
@@ -48,6 +49,15 @@ public class Functions {
         opmode.sleep(500);
         intake.stop();
     }
+
+//    public void turn2LL() {
+////        LLResult result = LL.limelight.getLatestResult();
+////        while(!result.isValid()) {
+////            Drive.right(0.5);
+////        }
+////        Drive.stop();
+//    }
+
 }
 
 //    if(Math.abs(follower.getPose().
