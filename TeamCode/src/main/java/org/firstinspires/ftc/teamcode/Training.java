@@ -38,6 +38,10 @@ private LinearOpMode opmode = null;
         BackLM.setDirection(DcMotorSimple.Direction.REVERSE);
         BackRM.setDirection(DcMotorSimple.Direction.FORWARD);
 
+        FrontLM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FrontRM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BackLM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BackRM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // set motor powers to 0
         FrontRM.setPower(0);
@@ -87,6 +91,13 @@ private LinearOpMode opmode = null;
         FrontLM.setPower(-speed);
         BackRM.setPower(-speed);
         BackLM.setPower(speed);
+    }
+
+    public void multi(double y, double x, double yaw) {
+        FrontLM.setPower(y + x + yaw);
+        BackLM.setPower(y - x + yaw);
+        FrontRM.setPower(y - x - yaw);
+        BackRM.setPower(y + x - yaw);
     }
     public void stop() {
         // set motor power to stop

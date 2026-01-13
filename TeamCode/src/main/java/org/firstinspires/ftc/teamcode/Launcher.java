@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.health.connect.datatypes.units.Velocity;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -16,7 +18,7 @@ public class Launcher {
 
     public Launcher() {
     }
-
+    Intake Intake = new Intake();
     public void init(LinearOpMode opMode) {
         HardwareMap hwmap;
 
@@ -32,11 +34,18 @@ public class Launcher {
 
         LLM.setPower(0);
         RLM.setPower(0);
+
+        double velocity = LLM.getVelocity();
+
+        Intake.init(opMode);
     }
 
-    public void autoLaunch() {
-        RLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RLM.setVelocity(3000);
+    public void autoLaunch(double power) {
+//        RLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        LLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RLM.setPower(power);
+        LLM.setPower(power);
+//        Intake.Launch(1,1);
     }
 
     public void manualLauncher(double power){
@@ -45,7 +54,6 @@ public class Launcher {
     }
 
     public void getV() {
-        RLM.setPower(1);
         opmode.telemetry.addLine("Velocity: " + RLM.getVelocity());
         opmode.telemetry.update();
     }

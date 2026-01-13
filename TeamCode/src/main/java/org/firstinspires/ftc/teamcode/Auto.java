@@ -27,6 +27,7 @@ import com.pedropathing.telemetry.SelectableOpMode;
 import com.pedropathing.util.*;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.sun.source.tree.IfTree;
 
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -36,7 +37,7 @@ import org.firstinspires.ftc.teamcode.Intake;
 import org.firstinspires.ftc.teamcode.Outtake;
 import org.firstinspires.ftc.teamcode.SensorTraining;
 import org.firstinspires.ftc.teamcode.ServoTraining;
-import org.firstinspires.ftc.teamcode.Limelight;
+//import org.firstinspires.ftc.teamcode.Limelight;
 import org.firstinspires.ftc.teamcode.Functions;
 
 @Autonomous(name = "Auto", group = "Autonomous")
@@ -56,8 +57,8 @@ public class Auto extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         // declare subassembly classes
         Training Drive = new Training();
-//        Intake Intake = new Intake();
-//        Outtake Outtake = new Outtake();
+        Intake Intake = new Intake();
+        Launcher Launch = new Launcher();
 //        SensorTraining Sensor = new SensorTraining();
 //        ServoTraining Servo = new ServoTraining();
 //        Limelight Limelight = new Limelight();
@@ -65,26 +66,108 @@ public class Auto extends LinearOpMode {
 
         // names subassembly classes
         Drive.init(this);
-//        Intake.init(this);
+        Intake.init(this);
 //        Outtake.init(this);
 //        Servo.init(this);
 //        Limelight.init(this);
+        Launch.init(this);
         Fun.init(this);
 
 //        follower.setStartingPose(new Pose());
 //
 //        poseHistory = follower.getPoseHistory();
-//
+
+        boolean red = false;
+        boolean done = false;
+
+        telemetry.addLine("press B if red alliance");
+        telemetry.update();
+
+        GamepadStates newGamPad2 = new GamepadStates(gamepad2);
+
+        while(!done) {
+
+            newGamPad2.updateState();
+
+            if (newGamPad2.b.released) {
+                red = true;
+            }
+
+            if(newGamPad2.a.released) {
+                done  = true;
+            }
+        }
+
         //code for the auto phase
         waitForStart();
 //
 //        Fun.forwardForDist(12, .5);
 
         while (opModeIsActive()) {
-        Drive.forward(1);
-        sleep(500);
-        Drive.stop();
-        break;
+//        Drive.forward(1);
+//        sleep(500);
+//        Drive.stop();
+            Drive.backwards(.8);
+            sleep(1200);
+            Drive.stop();
+            sleep(500);
+
+//            Limelight.turn2LL();
+//            if (red==true){
+//                Drive.left(.65);
+//                sleep(500);
+//            }
+//            else{
+//                Drive.right(.65);
+//                sleep(500);
+//            }
+//            Drive.stop();
+//            sleep(500);
+////            Limelight.detectPattern();
+//            sleep(1000);
+//
+//            if (red==true){
+//                Drive.right(.65);
+//                sleep(500);
+//            }
+//            else{
+//                Drive.left(.65);
+//                sleep(500);
+//            }
+//            Drive.stop();
+
+
+            Launch.autoLaunch(.5);
+            sleep(1000);
+            Intake.Feed();
+            Intake.intake(.65);
+            sleep(100);
+            Intake.stop();
+            Intake.FeedStop();
+            sleep(400);
+            Intake.Feed();
+            Intake.intake(.65);
+            sleep(175);
+            Intake.stop();
+            Intake.FeedStop();
+            sleep(400);
+            Intake.Feed();
+            Intake.intake(.65);
+            sleep(220);
+            Intake.stop();
+            Intake.FeedStop();
+            Launch.stop();
+            sleep(500);
+            if(red==true) {
+                Drive.StraffRight(.5);
+                sleep(1000);
+                Drive.stop();
+            } else if (red==false) {
+                Drive.StraffLeft(.5);
+                sleep(1000);
+                Drive.stop();
+            }
+            break;
         }
     }
 }

@@ -35,6 +35,7 @@ public class teleop extends LinearOpMode {
         Training Train = new Training();
         Launcher Launcher = new Launcher();
         Intake Intake = new Intake();
+        Functions Fun = new Functions();
 
         // Is this still/will be needed?
 //        ServoTraining Servo = new ServoTraining();
@@ -46,6 +47,7 @@ public class teleop extends LinearOpMode {
         Train.init(this);
         Intake.init(this);
         Launcher.init(this);
+        Fun.init(this);
 //        Servo.init(this);
 //        LL.init(this);
 //        Color.init(this);
@@ -62,7 +64,7 @@ public class teleop extends LinearOpMode {
 
 //        LL.getStatus();
 
-        double speed = 0.5;
+        double speed = 0.7;
 
         waitForStart();
 
@@ -74,29 +76,35 @@ public class teleop extends LinearOpMode {
 //            LL.detectPattern();
 
             // controls movement
-            if (gamepad1.left_stick_y < -.4) {
-                // run the forward function from Functions program
-                Train.forward(speed);
-            } else if (gamepad1.left_stick_y > .4) {
-                // backwards
-                Train.backwards(speed);
-            } else if (gamepad1.left_stick_x <-.4) {
-                // Strafe left
-                Train.StraffLeft(speed);
-            } else if (gamepad1.left_stick_x > .4) {
-                // Strafe right
-                Train.StraffRight(speed);
-            }else if (gamepad1.right_stick_x < -.4) {
-                // left
-                Train.left(speed);
-            } else if (gamepad1.right_stick_x > .4) {
-                // right
-                Train.right(speed);
+
+            if (gamepad1.left_stick_y !=0 || gamepad1.left_stick_x != 0 || gamepad1.right_stick_x != 0) {
+                Train.multi(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
             } else {
-                // run the stop function from training
                 Train.stop();
             }
 
+//            if (gamepad1.left_stick_y < -.4) {
+//                // run the forward function from Functions program
+//                Train.forward(speed);
+//            } else if (gamepad1.left_stick_y > .4) {
+//                // backwards
+//                Train.backwards(speed);
+//            } else if (gamepad1.left_stick_x < -.4) {
+//                // Strafe left
+//                Train.StraffLeft(speed);
+//            } else if (gamepad1.left_stick_x > .4) {
+//                // Strafe right
+//                Train.StraffRight(speed);
+//            } else if (gamepad1.right_stick_x < -.4) {
+//                // left
+//                Train.left(speed);
+//            } else if (gamepad1.right_stick_x > .4) {
+//                // right
+//                Train.right(speed);
+//            } else {
+//                // run the stop function from training
+//                Train.stop();
+//            }
 
 
             //initialize speed as a variable
@@ -112,16 +120,12 @@ public class teleop extends LinearOpMode {
             // intake control
             if (gamepad2.left_stick_y < -.4 || gamepad2.dpad_down) {
                 // grab ball
-                Intake.intake(.75);
+                Intake.intake(.9);
             } else if (gamepad2.left_stick_y > .4 || gamepad2.dpad_up) {
                 // expel ball
-                Intake.reverse();
-            } else if (gamepad2.left_stick_x > .4 || gamepad2.dpad_left) {
-                Intake.stop();
-            } else if (gamepad2.left_stick_x < -.4 || gamepad2.dpad_right) {
-                Intake.stop();
-            } else {
-                Intake.stop();
+                Intake.reverse(0.75);
+            } else if (newGamePad2.y.state) {
+               Intake.Launch(.55,.55);
             }
 
             // launcher control
@@ -129,9 +133,9 @@ public class teleop extends LinearOpMode {
                 Launcher.manualLauncher(speed);
             } else {
                 Launcher.stop();
+                Intake.FeedStop();
+                Intake.stop();
             }
-
-
 
             // speed control
             // decrease drive speed variable
@@ -149,6 +153,7 @@ public class teleop extends LinearOpMode {
                     speed = (1);
                 }
             }
+
 //            LLResult result = limelight.getLatestResult();
 //            LL.getResult();
         }
