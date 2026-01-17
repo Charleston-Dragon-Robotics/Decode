@@ -77,7 +77,7 @@ public class teleop extends LinearOpMode {
 
             // controls movement
 
-            if (gamepad1.left_stick_y !=0 || gamepad1.left_stick_x != 0 || gamepad1.right_stick_x != 0) {
+            if (gamepad1.left_stick_y != 0 || gamepad1.left_stick_x != 0 || gamepad1.right_stick_x != 0) {
                 Train.multi(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
             } else {
                 Train.stop();
@@ -118,19 +118,21 @@ public class teleop extends LinearOpMode {
 //            }
 
             // intake control
-            if (gamepad2.left_stick_y < -.4 || gamepad2.dpad_down) {
+            if (gamepad2.left_stick_y > .4 || gamepad2.dpad_down) {
                 // grab ball
                 Intake.intake(.9);
-            } else if (gamepad2.left_stick_y > .4 || gamepad2.dpad_up) {
+            } else if ((gamepad2.left_stick_y < -.4) && newGamePad2.left_trigger.state) {
                 // expel ball
                 Intake.reverse(0.75);
-            } else if (newGamePad2.y.state) {
-               Intake.Launch(.55,.55);
+            } else if (newGamePad2.a.state) {
+                Intake.Launch(.55, .9);
+                Launcher.manualLauncher(speed);
             }
 
             // launcher control
-            if (gamepad2.right_stick_y < -.4 ||newGamePad2.a.state) {
+            else if (gamepad2.right_stick_y < -.4) {
                 Launcher.manualLauncher(speed);
+                Launcher.getV();
             } else {
                 Launcher.stop();
                 Intake.FeedStop();
@@ -145,7 +147,7 @@ public class teleop extends LinearOpMode {
                 if (speed <= 0.1) {
                     speed = 0.1;
                 }
-            //increase speed variable
+                //increase speed variable
             } else if (newGamePad1.right_bumper.released) {
                 // when right bumper is pressed, speeds up movement universally
                 speed += (0.1);

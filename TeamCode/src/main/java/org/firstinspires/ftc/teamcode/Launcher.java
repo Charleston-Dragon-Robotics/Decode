@@ -41,16 +41,19 @@ public class Launcher {
     }
 
     public void autoLaunch(double power) {
-//        RLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        LLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RLM.setPower(power);
-        LLM.setPower(power);
+        RLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RLM.setVelocity(700);
+        LLM.setVelocity(700);
+
 //        Intake.Launch(1,1);
     }
 
     public void manualLauncher(double power){
-        RLM.setPower(power);
-        LLM.setPower(power);
+        RLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RLM.setVelocity(1050);
+        LLM.setVelocity(1200);
     }
 
     public void getV() {
