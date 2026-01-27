@@ -52,6 +52,22 @@ public class Auto extends LinearOpMode {
         // DRIVE > MOVEMENT
     }
 
+    private final Pose start= new Pose(63,7,Math.toRadians(180));
+    private final Pose score= new Pose(31,110,Math.toRadians(135));
+    public void setPathState(int pState){
+        pathState = pState;
+        pathTimer.resetTimer();
+        pathTimer = new Timer();
+        opModeTimer = new Timer();
+        opModeTimer.resetTimer();
+
+
+        follower = Constants.createFollower(hardwareMap);
+        buildPaths();
+        follower.setStartingPose(start);
+    }
+
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -72,6 +88,7 @@ public class Auto extends LinearOpMode {
 //        Limelight.init(this);
         Launch.init(this);
         Fun.init(this);
+
 
 //        follower.setStartingPose(new Pose());
 //
@@ -107,10 +124,10 @@ public class Auto extends LinearOpMode {
 //        Drive.forward(1);
 //        sleep(500);
 //        Drive.stop();
-            Drive.backwards(.8);
-            sleep(1200);
-            Drive.stop();
-            sleep(500);
+//            Drive.backwards(.8);
+//            sleep(1200);
+//            Drive.stop();
+//            sleep(500);
 
 //            Limelight.turn2LL();
 //            if (red==true){
@@ -135,37 +152,35 @@ public class Auto extends LinearOpMode {
 //                sleep(500);
 //            }
 //            Drive.stop();
-
-
-            Launch.autoLaunch(.5);
-            sleep(1000);
-            Intake.Feed();
-            Intake.intake(.65);
-            sleep(100);
-            Intake.stop();
-            Intake.FeedStop();
-            sleep(400);
-            Intake.Feed();
-            Intake.intake(.65);
-            sleep(175);
-            Intake.stop();
-            Intake.FeedStop();
-            sleep(400);
-            Intake.Feed();
-            Intake.intake(.65);
-            sleep(220);
-            Intake.stop();
-            Intake.FeedStop();
-            Launch.stop();
-            sleep(500);
+//            Launch.autoLaunch(.5);
+//            sleep(1000);
+//            Intake.Feed();
+//            Intake.intake(.65);
+//            sleep(100);
+//            Intake.stop();
+//            Intake.FeedStop();
+//            sleep(400);
+//            Intake.Feed();
+//            Intake.intake(.65);
+//            sleep(175);
+//            Intake.stop();
+//            Intake.FeedStop();
+//            sleep(400);
+//            Intake.Feed();
+//            Intake.intake(.65);
+//            sleep(220);
+//            Intake.stop();
+//            Intake.FeedStop();
+//            Launch.stop();
+//            sleep(500);
             if(red==true) {
-                Drive.StraffRight(.5);
-                sleep(1000);
-                Drive.stop();
+//                Drive.StraffRight(.5);
+//                sleep(1000);
+//                Drive.stop();
             } else if (red==false) {
-                Drive.StraffLeft(.5);
-                sleep(1000);
-                Drive.stop();
+//                Drive.StraffLeft(.5);
+//                sleep(1000);
+//                Drive.stop();
             }
             break;
         }
