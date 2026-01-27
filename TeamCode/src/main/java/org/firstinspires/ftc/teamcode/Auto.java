@@ -47,6 +47,8 @@ public class Auto extends LinearOpMode {
     static PoseHistory poseHistory;
     private Timer pathTimer, opModeTimer;
 
+    private int pathState;
+
     public enum PathState{
        // START POSITION I GUESS ALSO END POSITION I DONT KNOW WHAT THIS GUY IS TALKING ABOUT
         // DRIVE > MOVEMENT
@@ -54,6 +56,14 @@ public class Auto extends LinearOpMode {
 
     private final Pose start= new Pose(63,7,Math.toRadians(180));
     private final Pose score= new Pose(31,110,Math.toRadians(135));
+
+    public void buildPaths(){
+        scorePre=follower.pathBuilder()
+                .addPath(new BezierLine(start, score))
+                .setLinearHeadingInterpolation(start.getHeading(), score.getHeading())
+                .build();
+
+    }
     public void setPathState(int pState){
         pathState = pState;
         pathTimer.resetTimer();
