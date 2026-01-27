@@ -19,14 +19,14 @@ public class Constants {
             .mass(10.4)
             .forwardZeroPowerAcceleration(-35.72)   //needs updated
             .lateralZeroPowerAcceleration(-59.83)
-            .translationalPIDFCoefficients(new PIDFCoefficients(0,0,0,0))
-            .headingPIDFCoefficients(new PIDFCoefficients(0, 0, 0,  0))
-            .drivePIDFCoefficients(new FilteredPIDFCoefficients(0, 0, 0, 0, 0))
-            .centripetalScaling(0.005);
+            .translationalPIDFCoefficients(new PIDFCoefficients(0.2, 0, 0.05, 0.025))
+            .headingPIDFCoefficients(new PIDFCoefficients(0.85, 0, 0.05, 0.03))
+            .drivePIDFCoefficients(new FilteredPIDFCoefficients(0.9, 0, 0.008, 1, 0))
+            .centripetalScaling(0.0005);
 
 
     public static MecanumConstants driveConstants = new MecanumConstants()
-            .maxPower(0.5)
+            .maxPower(1)
             .rightFrontMotorName("FrontRM")
             .rightRearMotorName("BackRM")
             .leftRearMotorName("BackLM")
@@ -55,6 +55,4 @@ public class Constants {
                 .pinpointLocalizer(localizerConstants)
                 .build();
     }
-
-
 }
