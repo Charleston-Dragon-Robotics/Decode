@@ -1,9 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
-import android.health.connect.datatypes.units.Velocity;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -12,8 +11,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Launcher {
 
-    private DcMotorEx LLM = null;
-    private DcMotorEx RLM = null;
+    private DcMotorEx LLM;
+    private DcMotorEx RLM;
     private LinearOpMode opmode = null;
 
     public Launcher() {

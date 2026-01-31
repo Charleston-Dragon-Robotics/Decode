@@ -1,51 +1,15 @@
 package org.firstinspires.ftc.teamcode;
 
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
-import android.media.metrics.PlaybackErrorEvent;
-
-import com.pedropathing.ftc.InvertedFTCCoordinates;
-import com.pedropathing.ftc.PoseConverter;
-import com.pedropathing.paths.callbacks.PoseCallback;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-
-
 import com.pedropathing.util.PoseHistory;
 import com.pedropathing.follower.Follower;
-
-import com.bylazar.configurables.PanelsConfigurables;
-import com.bylazar.configurables.annotations.Configurable;
-import com.bylazar.configurables.annotations.IgnoreConfigurable;
-import com.bylazar.field.FieldManager;
-import com.bylazar.field.PanelsField;
-import com.bylazar.field.Style;
-import com.bylazar.telemetry.PanelsTelemetry;
-import com.bylazar.telemetry.TelemetryManager;
-import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.*;
-import com.pedropathing.math.*;
 import com.pedropathing.paths.*;
-import com.pedropathing.telemetry.SelectableOpMode;
 import com.pedropathing.util.*;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.sun.source.tree.IfTree;
-
-
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Training;
-import org.firstinspires.ftc.teamcode.GamepadStates;
-import org.firstinspires.ftc.teamcode.Intake;
-import org.firstinspires.ftc.teamcode.Outtake;
-import org.firstinspires.ftc.teamcode.SensorTraining;
-import org.firstinspires.ftc.teamcode.ServoTraining;
 //import org.firstinspires.ftc.teamcode.Limelight;
-import org.firstinspires.ftc.teamcode.Functions;
+
 
 @Autonomous(name = "Auto", group = "Autonomous")
 public class Auto extends LinearOpMode {

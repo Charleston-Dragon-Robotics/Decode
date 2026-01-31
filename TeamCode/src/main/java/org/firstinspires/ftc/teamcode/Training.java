@@ -107,4 +107,8 @@ private LinearOpMode opmode = null;
         BackLM.setPower(0);
     }
 
+    public void sleep(int time) {
+        opmode.sleep(time);
+    }
+
 }
