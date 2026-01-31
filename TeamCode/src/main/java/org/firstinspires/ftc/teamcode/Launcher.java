@@ -17,7 +17,9 @@ public class Launcher {
 
     public Launcher() {
     }
+
     Intake Intake = new Intake();
+
     public void init(LinearOpMode opMode) {
         HardwareMap hwmap;
 
@@ -48,11 +50,12 @@ public class Launcher {
 //        Intake.Launch(1,1);
     }
 
-    public void manualLauncher(double power){
+    public void manualLauncher(double power) {
         RLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LLM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RLM.setVelocity(1050);
+        RLM.setVelocity(1200);
         LLM.setVelocity(1200);
+        // maybe 1050?
     }
 
     public void getV() {
@@ -74,7 +77,8 @@ public class Launcher {
         LLM.setPower(0);
         RLM.setPower(0);
     }
-    public void stop(){
+
+    public void stop() {
         RLM.setPower(0);
         LLM.setPower(0);
     }

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import static java.lang.Thread.sleep;
+
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
@@ -8,7 +9,7 @@ import com.pedropathing.paths.Path;
 import com.pedropathing.paths.PathChain;
 import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import  com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 @Autonomous(name = "Auto2", group = "autonomous")
@@ -48,9 +49,10 @@ public class Auto2 extends OpMode {
         pathState = pState;
         pathTimer.resetTimer();
     }
-    public void intPaths(){
 
-        scorePreload=new Path(new BezierLine(BFstart, BFscore));
+    public void intPaths() {
+
+        scorePreload = new Path(new BezierLine(BFstart, BFscore));
         scorePreload.setLinearHeadingInterpolation(BFstart.getHeading(), BFscore.getHeading());
 
 //        BCgrab1 = follower.pathBuilder()
@@ -58,6 +60,7 @@ public class Auto2 extends OpMode {
 //                .setLinearHeadingInterpolation(BCscore.getHeading(), BFstart.getHeading())
 //                .build();
     }
+
     public void autonomousPathUpdate() {
         switch (pathState) {
             case 0:
@@ -65,32 +68,32 @@ public class Auto2 extends OpMode {
                 setPathState(1);
                 break;
             case 1:
-                if(!follower.isBusy()) {
-            Launch.autoLaunch(.5);
-            Drive.sleep(1000);
-            Intake.Feed();
-            Intake.intake(.65);
-            Drive.sleep(100);
-            Intake.stop();
-            Intake.FeedStop();
-            Drive.sleep(400);
-            Intake.Feed();
-            Intake.intake(.65);
-            Drive.sleep(175);
-            Intake.stop();
-            Intake.FeedStop();
-            Drive.sleep(400);
-            Intake.Feed();
-            Intake.intake(.65);
-            Drive.sleep(220);
-            Intake.stop();
-            Intake.FeedStop();
-            Launch.stop();
-            Drive.sleep(500);
+                if (!follower.isBusy()) {
+                    Launch.autoLaunch(.5);
+                    Drive.sleep(1000);
+                    Intake.Feed();
+                    Intake.intake(.65);
+                    Drive.sleep(100);
+                    Intake.stop();
+                    Intake.FeedStop();
+                    Drive.sleep(400);
+                    Intake.Feed();
+                    Intake.intake(.65);
+                    Drive.sleep(175);
+                    Intake.stop();
+                    Intake.FeedStop();
+                    Drive.sleep(400);
+                    Intake.Feed();
+                    Intake.intake(.65);
+                    Drive.sleep(220);
+                    Intake.stop();
+                    Intake.FeedStop();
+                    Launch.stop();
+                    Drive.sleep(500);
                 }
                 break;
             case 2:
-                if(!follower.isBusy()) {
+                if (!follower.isBusy()) {
                     follower.followPath(BCgrab1, true);
                     setPathState(2);
                 }
@@ -101,11 +104,13 @@ public class Auto2 extends OpMode {
 
 
     }
+
     @Override
     public void loop() {
         follower.update();
         autonomousPathUpdate();
     }
+
     @Override
     public void init() {
         pathTimer = new Timer();
@@ -124,8 +129,10 @@ public class Auto2 extends OpMode {
 
 
     }
+
     @Override
-    public void init_loop() {}
+    public void init_loop() {
+    }
 
     @Override
     public void start() {
