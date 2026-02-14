@@ -70,7 +70,12 @@ public class teleop extends LinearOpMode {
             // controls movement
 
             if (gamepad1.left_stick_y != 0 || gamepad1.left_stick_x != 0 || gamepad1.right_stick_x != 0) {
-                Train.multi(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+                if (newGamePad1.left_trigger.state) {
+                    Train.multi(-gamepad1.left_stick_y / 2, gamepad1.left_stick_x / 2,
+                            gamepad1.right_stick_x / 2);
+                } else {
+                    Train.multi(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+                }
             } else {
                 Train.stop();
             }
@@ -110,21 +115,27 @@ public class teleop extends LinearOpMode {
 //            }
 
             // intake control
-            if (gamepad2.left_stick_y > .4 || gamepad2.dpad_down) {
+            if (gamepad2.left_stick_y > .4 || newGamePad2.left_trigger.state) {
                 // grab ball
                 Intake.intake(.9);
-            } else if ((gamepad2.left_stick_y < -.4) && newGamePad2.left_trigger.state) {
+                Launcher.stop();
+            } else if ((gamepad2.left_stick_y < -.4) && gamepad2.dpad_down) {
                 // expel ball
                 Intake.reverse(0.75);
             } else if (newGamePad2.a.state) {
-                Intake.Launch(.55, .9);
-                Launcher.manualLauncher(speed);
-            }
+                Train.stop();
+                Launcher.autoLaunchClose();
+            } else if (newGamePad2.x.released) {
 
+                Train.stop();
+                Launcher.autoLaunchFar();
+            } else if (newGamePad2.y.state) {
+                Intake.Launch(0.5, 0.6);
+            }
             // launcher control
-            else if (gamepad2.right_stick_y < -.4) {
-                Launcher.manualLauncher(speed);
-                Launcher.getV();
+            else if (newGamePad2.right_trigger.state) {
+                Launcher.manualLauncher();
+//                Launcher.getV();
             } else {
                 Launcher.stop();
                 Intake.FeedStop();

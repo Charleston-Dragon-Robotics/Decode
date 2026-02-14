@@ -54,6 +54,8 @@ public class Intake {
     public void Feed(){
         FeederM.setPower(1);
     }
+
+    public void FeedR() { FeederM.setPower(-0.2);}
     public void FeedStop(){
         FeederM.setPower(0);
     }
@@ -62,5 +64,10 @@ public class Intake {
         FeederM.setPower(feedSpeed);
         IntakeM.setPower(intakeSpeed);
     }
+    public void SLaunch() {
+        FeederM.setPower(0);
+        IntakeM.setPower(0);
+    }
+
 
 }
