@@ -1,11 +1,9 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Subassys;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.robotcontroller.external.samples.SensorColor;
 
 public class Intake {
     //creates motor
@@ -54,7 +52,16 @@ public class Intake {
         IntakeM.setPower(0);
     }
     public void Feed(){
-        FeederM.setPower(1);
+        FeederM.setPower(0.5);
+    }
+
+    public void FeedR() {
+        FeederM.setPower(-0.2);
+    }
+    public void Sort(){
+        FeederM.setPower(.5);
+        opmode.sleep(200);
+        FeederM.setPower(0);
     }
     public void FeedStop(){
         FeederM.setPower(0);
@@ -64,5 +71,15 @@ public class Intake {
         FeederM.setPower(feedSpeed);
         IntakeM.setPower(intakeSpeed);
     }
+
+    public void Bunch(double feedSpeed, double intakeSpeed){
+        FeederM.setPower(-feedSpeed);
+        IntakeM.setPower(intakeSpeed);
+    }
+    public void SLaunch() {
+        FeederM.setPower(0);
+        IntakeM.setPower(0);
+    }
+
 
 }

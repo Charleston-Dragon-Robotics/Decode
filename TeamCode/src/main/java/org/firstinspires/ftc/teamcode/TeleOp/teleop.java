@@ -1,21 +1,19 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.TeleOp;
 
 import android.app.Activity;
 import android.view.View;
 
-import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.hardware.limelightvision.LLResultTypes;
-import com.qualcomm.hardware.limelightvision.LLStatus;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.ColorSensor;
+
+import org.firstinspires.ftc.teamcode.Functions;
+import org.firstinspires.ftc.teamcode.GamepadStates;
+import org.firstinspires.ftc.teamcode.Subassys.Drivetrain;
+import org.firstinspires.ftc.teamcode.Subassys.Intake;
+import org.firstinspires.ftc.teamcode.Subassys.Launcher;
 //import com.bylazar.
 
-import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
-import org.firstinspires.ftc.teamcode.GamepadStates;
-
-import java.util.List;
 
 @TeleOp(name = "Teleop", group = "Teleop")
 // this is the thing that we run
@@ -32,7 +30,7 @@ public class teleop extends LinearOpMode {
         relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
 
         // declare subassembly classes
-        Training Train = new Training();
+        Drivetrain Train = new Drivetrain();
         Launcher Launcher = new Launcher();
         Intake Intake = new Intake();
         Functions Fun = new Functions();
@@ -78,7 +76,12 @@ public class teleop extends LinearOpMode {
             // controls movement
 
             if (gamepad1.left_stick_y != 0 || gamepad1.left_stick_x != 0 || gamepad1.right_stick_x != 0) {
-                Train.multi(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+                if (newGamePad1.left_trigger.state) {
+                    Train.multi(-gamepad1.left_stick_y / 2, gamepad1.left_stick_x / 2,
+                            gamepad1.right_stick_x / 2);
+                } else {
+                    Train.multi(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+                }
             } else {
                 Train.stop();
             }
@@ -109,7 +112,6 @@ public class teleop extends LinearOpMode {
 
             //initialize speed as a variable
             telemetry.addData("Speed: ", speed);
-            telemetry.update();
 
 //            if (Color.isGreen()) {
 //                relativeLayout.setBackgroundColor(Color.greenV());
@@ -118,21 +120,26 @@ public class teleop extends LinearOpMode {
 //            }
 
             // intake control
-            if (gamepad2.left_stick_y > .4 || gamepad2.dpad_down) {
+            if (gamepad2.left_stick_y > .4 || newGamePad2.left_trigger.state) {
                 // grab ball
                 Intake.intake(.9);
-            } else if ((gamepad2.left_stick_y < -.4) && newGamePad2.left_trigger.state) {
+                Launcher.stop();
+            } else if ((gamepad2.left_stick_y < -.4) && gamepad2.dpad_down) {
                 // expel ball
                 Intake.reverse(0.75);
             } else if (newGamePad2.a.state) {
-                Intake.Launch(.55, .9);
-                Launcher.manualLauncher(speed);
+                Train.stop();
+                Launcher.autoLaunchClose();
+            } else if (newGamePad2.x.released) {
+                Train.stop();
+                Launcher.autoLaunchFar();
+            } else if (newGamePad2.y.state) {
+                Intake.Launch(0.5, 0.6);
             }
-
             // launcher control
-            else if (gamepad2.right_stick_y < -.4) {
-                Launcher.manualLauncher(speed);
-                Launcher.getV();
+            else if (newGamePad2.right_trigger.state) {
+                Launcher.manualLauncher();
+//                Launcher.getV();
             } else {
                 Launcher.stop();
                 Intake.FeedStop();

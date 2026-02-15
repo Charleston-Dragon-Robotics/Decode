@@ -2,17 +2,14 @@ package org.firstinspires.ftc.teamcode;
 
 import static java.lang.Thread.sleep;
 
-import com.pedropathing.Drivetrain;
-import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
 import com.pedropathing.util.PoseHistory;
 import com.pedropathing.follower.Follower;
 
-import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.teamcode.Subassys.Drivetrain;
+import org.firstinspires.ftc.teamcode.Subassys.Intake;
 
 public class Functions {
     //intalise varible
@@ -22,8 +19,8 @@ public class Functions {
 
     private LinearOpMode opmode = null;
 
-    Training Drive = new Training();
-//    Limelight LL = new Limelight();
+    Drivetrain Drive = new Drivetrain();
+    //    Limelight LL = new Limelight();
     Intake intake = new Intake();
 
 
