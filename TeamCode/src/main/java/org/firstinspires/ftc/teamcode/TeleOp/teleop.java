@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.TeleOp;
 
 import android.app.Activity;
 import android.view.View;
@@ -6,6 +6,12 @@ import android.view.View;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import org.firstinspires.ftc.teamcode.Functions;
+import org.firstinspires.ftc.teamcode.GamepadStates;
+import org.firstinspires.ftc.teamcode.Subassys.Drivetrain;
+import org.firstinspires.ftc.teamcode.Subassys.Intake;
+import org.firstinspires.ftc.teamcode.Subassys.Launcher;
 //import com.bylazar.
 
 
@@ -24,7 +30,7 @@ public class teleop extends LinearOpMode {
         relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
 
         // declare subassembly classes
-        Training Train = new Training();
+        Drivetrain Train = new Drivetrain();
         Launcher Launcher = new Launcher();
         Intake Intake = new Intake();
         Functions Fun = new Functions();

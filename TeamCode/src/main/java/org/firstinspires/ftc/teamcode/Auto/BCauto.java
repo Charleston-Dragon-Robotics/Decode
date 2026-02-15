@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -8,17 +8,24 @@ import com.pedropathing.geometry.*;
 import com.pedropathing.paths.*;
 import com.pedropathing.util.*;
 
-@Autonomous(name = "RFauto", group = "Autonomous")
-public class RFauto extends LinearOpMode {
+import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Functions;
+import org.firstinspires.ftc.teamcode.GamepadStates;
+import org.firstinspires.ftc.teamcode.Subassys.Intake;
+import org.firstinspires.ftc.teamcode.Subassys.Launcher;
+import org.firstinspires.ftc.teamcode.Subassys.Drivetrain;
+
+@Autonomous(name = "BCauto", group = "Autonomous")
+public class BCauto extends LinearOpMode {
 
     private Follower follower; // Pedro Pathing follower
 
-    private final Pose RFScore = new Pose(55, 11.5, Math.toRadians(160)); // may want to use 155
-    private final Pose RFStart = new Pose(62.5, 9, Math.toRadians(180));
-    private final Pose R1A = new Pose(24.25, 9, Math.toRadians(90));
-    private final Pose R1C = new Pose(24.25, 36, Math.toRadians(90));
-    private final Pose RFScore2 = new Pose(53, 10.5, Math.toRadians(160));
-    private PathChain RscorePreload, Ralign1, Rintake1, Rscore2;
+    private final Pose BCScore = new Pose(17.75, -17, Math.toRadians(225)); // may want to use 155
+    private final Pose BCStart = new Pose(0, 0, Math.toRadians(225));
+    private final Pose B3A = new Pose(36.5, -10, Math.toRadians(90));
+    private final Pose B3C = new Pose(36.5, 13.5, Math.toRadians(90));
+    private final Pose BCScore2 = new Pose(53, 10.5, Math.toRadians(225));
+    private PathChain BscorePreload, Balign3, Bintake3, Bscore3;
 
 
     private Pose currentPose; // Current pose of the robot
@@ -26,7 +33,7 @@ public class RFauto extends LinearOpMode {
     private Timer pathTimer, opModeTimer;
 
     Launcher Launch = new Launcher();
-    Intake Intake = new Intake();
+    org.firstinspires.ftc.teamcode.Subassys.Intake Intake = new Intake();
 
     private int pathState;
 
@@ -41,24 +48,24 @@ public class RFauto extends LinearOpMode {
 
     public void buildPaths() {
 
-        RscorePreload = follower.pathBuilder()
-                .addPath(new BezierLine(RFStart, RFScore))
-                .setLinearHeadingInterpolation(RFStart.getHeading(), RFScore.getHeading())
+        BscorePreload = follower.pathBuilder()
+                .addPath(new BezierLine(BCStart, BCScore))
+                .setLinearHeadingInterpolation(BCStart.getHeading(), BCScore.getHeading())
                 .build();
 
-        Ralign1 = follower.pathBuilder()
-                .addPath(new BezierLine(RFScore, R1A))
-                .setLinearHeadingInterpolation(RFScore.getHeading(), R1A.getHeading())
+        Balign3 = follower.pathBuilder()
+                .addPath(new BezierLine(BCScore, B3A))
+                .setLinearHeadingInterpolation(BCScore.getHeading(), B3A.getHeading())
                 .build();
 
-        Rintake1 = follower.pathBuilder()
-                .addPath(new BezierLine(R1A, R1C))
-                .setLinearHeadingInterpolation(R1A.getHeading(), R1C.getHeading())
+        Bintake3 = follower.pathBuilder()
+                .addPath(new BezierLine(B3A, B3C))
+                .setLinearHeadingInterpolation(B3A.getHeading(), B3C.getHeading())
                 .build();
 
-        Rscore2 = follower.pathBuilder()
-                .addPath(new BezierLine(R1C, RFScore2))
-                .setLinearHeadingInterpolation(R1C.getHeading(), RFScore2.getHeading())
+        Bscore3 = follower.pathBuilder()
+                .addPath(new BezierLine(B3C, BCScore2))
+                .setLinearHeadingInterpolation(B3C.getHeading(), BCScore2.getHeading())
                 .build();
 
 
@@ -72,7 +79,7 @@ public class RFauto extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // declare subassembly classes
-        Training Drive = new Training();
+        Drivetrain Drive = new Drivetrain();
 
 //        SensorTraining Sensor = new SensorTraining();
 //        ServoTraining Servo = new ServoTraining();
@@ -90,7 +97,7 @@ public class RFauto extends LinearOpMode {
         Fun.init(this);
 
         follower = Constants.createFollower(hardwareMap);
-        follower.setStartingPose(RFStart);
+        follower.setStartingPose(BCStart);
 
         pathTimer = new Timer();
         opModeTimer = new Timer();
@@ -114,19 +121,18 @@ public class RFauto extends LinearOpMode {
     private void rFStateMachine() {
         switch (pathState) {
             case 0:
-                follower.followPath(RscorePreload, true);
+                follower.followPath(BscorePreload, true);
                 setPathState(1);
                 break;
             case 1:
                 if (!follower.isBusy()) {
-
                     Launch.autoLaunchFar();
                     setPathState(2);
                 }
                 break;
             case 2:
                 if (!follower.isBusy()) {
-                    follower.followPath(Ralign1, true);
+                    follower.followPath(Balign3, true);
                     setPathState(3);
                 }
                 break;
@@ -138,7 +144,7 @@ public class RFauto extends LinearOpMode {
                 break;
             case 4:
                 if (!follower.isBusy()) {
-                    follower.followPath(Rintake1, true);
+                    follower.followPath(Bintake3, true);
                     setPathState(5);
                 }
                 break;
@@ -150,7 +156,7 @@ public class RFauto extends LinearOpMode {
                 break;
             case 6:
                 if (!follower.isBusy()) {
-                    follower.followPath(Rscore2, true);
+                    follower.followPath(Bscore3, true);
                     setPathState(7);
                 }
                 break;
@@ -162,7 +168,7 @@ public class RFauto extends LinearOpMode {
                 break;
             case 8:
                 if (!follower.isBusy()) {
-                    follower.followPath(Ralign1, true);
+                    follower.followPath(Balign3, true);
                     setPathState(-1);
                 }
                 break;
@@ -170,6 +176,4 @@ public class RFauto extends LinearOpMode {
         }
     }
 }
-
-
 

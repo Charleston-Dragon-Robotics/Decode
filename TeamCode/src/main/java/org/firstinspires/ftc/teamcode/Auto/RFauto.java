@@ -1,5 +1,4 @@
-package org.firstinspires.ftc.teamcode;
-
+package org.firstinspires.ftc.teamcode.Auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -8,22 +7,25 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.*;
 import com.pedropathing.paths.*;
 import com.pedropathing.util.*;
-//import org.firstinspires.ftc.teamcode.Limelight;
 
+import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Functions;
+import org.firstinspires.ftc.teamcode.GamepadStates;
+import org.firstinspires.ftc.teamcode.Subassys.Intake;
+import org.firstinspires.ftc.teamcode.Subassys.Launcher;
+import org.firstinspires.ftc.teamcode.Subassys.Drivetrain;
 
-@Autonomous(name = "BFauto", group = "Autonomous")
-public class BFauto extends LinearOpMode {
+@Autonomous(name = "RFauto", group = "Autonomous")
+public class RFauto extends LinearOpMode {
 
     private Follower follower; // Pedro Pathing follower
 
-    private final Pose BFStart = new Pose(62.5, -15.5, Math.toRadians(180));
-    private final Pose BFScore = new Pose(53, -10.5, Math.toRadians(210));
-    private final Pose B1A = new Pose(24.25, -10, Math.toRadians(270));
-    private final Pose B1C = new Pose(24.25, -40, Math.toRadians(270));
-    private final Pose BFScore2 = new Pose(53, -10.5, Math.toRadians(205));
-
-
-    private PathChain BscorePreload, Balign1, Bintake1, Bscore2;
+    private final Pose RFScore = new Pose(55, 11.5, Math.toRadians(160)); // may want to use 155
+    private final Pose RFStart = new Pose(62.5, 9, Math.toRadians(180));
+    private final Pose R1A = new Pose(24.25, 9, Math.toRadians(90));
+    private final Pose R1C = new Pose(24.25, 36, Math.toRadians(90));
+    private final Pose RFScore2 = new Pose(53, 10.5, Math.toRadians(160));
+    private PathChain RscorePreload, Ralign1, Rintake1, Rscore2;
 
 
     private Pose currentPose; // Current pose of the robot
@@ -31,7 +33,7 @@ public class BFauto extends LinearOpMode {
     private Timer pathTimer, opModeTimer;
 
     Launcher Launch = new Launcher();
-    Intake Intake = new Intake();
+    org.firstinspires.ftc.teamcode.Subassys.Intake Intake = new Intake();
 
     private int pathState;
 
@@ -45,36 +47,29 @@ public class BFauto extends LinearOpMode {
 //    private PathChain grab1, score1;
 
     public void buildPaths() {
-//        scorePreload = new PathChain(new BezierLine(BFStart, BFScore));
-//        scorePre.setLinearHeadingInterpolation(start.getHeading(), score.getHeading());
 
-        BscorePreload = follower.pathBuilder()
-                .addPath(new BezierLine(BFStart, BFScore))
-                .setLinearHeadingInterpolation(BFStart.getHeading(), BFScore.getHeading())
+        RscorePreload = follower.pathBuilder()
+                .addPath(new BezierLine(RFStart, RFScore))
+                .setLinearHeadingInterpolation(RFStart.getHeading(), RFScore.getHeading())
                 .build();
 
-        Balign1 = follower.pathBuilder()
-                .addPath(new BezierLine(BFScore, B1A))
-                .setLinearHeadingInterpolation(BFScore.getHeading(), B1A.getHeading())
+        Ralign1 = follower.pathBuilder()
+                .addPath(new BezierLine(RFScore, R1A))
+                .setLinearHeadingInterpolation(RFScore.getHeading(), R1A.getHeading())
                 .build();
 
-        Bintake1 = follower.pathBuilder()
-                .addPath(new BezierLine(B1A, B1C))
-                .setLinearHeadingInterpolation(B1A.getHeading(), B1C.getHeading())
+        Rintake1 = follower.pathBuilder()
+                .addPath(new BezierLine(R1A, R1C))
+                .setLinearHeadingInterpolation(R1A.getHeading(), R1C.getHeading())
                 .build();
 
-        Bscore2 = follower.pathBuilder()
-                .addPath(new BezierLine(B1C, BFScore2))
-                .setLinearHeadingInterpolation(B1C.getHeading(), BFScore2.getHeading())
+        Rscore2 = follower.pathBuilder()
+                .addPath(new BezierLine(R1C, RFScore2))
+                .setLinearHeadingInterpolation(R1C.getHeading(), RFScore2.getHeading())
                 .build();
 
-        // caffeine is the only thing that can numb my brain enough for this to be possible 💔💔💔
-        // nobody can stop me from complaining here sighhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-        // robotics is fun but like this is really difficult ...
-        // coding is probably the worst job to have on this team bc if we go to worlds its just straight code work
 
     }
-
 
     public void setPathState(int pState) {
         pathState = pState;
@@ -84,11 +79,12 @@ public class BFauto extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // declare subassembly classes
-        Training Drive = new Training();
+        Drivetrain Drive = new Drivetrain();
 
 //        SensorTraining Sensor = new SensorTraining();
 //        ServoTraining Servo = new ServoTraining();
 //        Limelight Limelight = new Limelight();
+
         Functions Fun = new Functions();
 
         // names subassembly classes
@@ -101,7 +97,7 @@ public class BFauto extends LinearOpMode {
         Fun.init(this);
 
         follower = Constants.createFollower(hardwareMap);
-        follower.setStartingPose(BFStart);
+        follower.setStartingPose(RFStart);
 
         pathTimer = new Timer();
         opModeTimer = new Timer();
@@ -109,60 +105,37 @@ public class BFauto extends LinearOpMode {
 
         GamepadStates newGamePad2 = new GamepadStates(gamepad2);
 
+        buildPaths();
 
-//        follower.setStartingPose(new Pose());
-//
-//        poseHistory = follower.getPoseHistory();
-
-//        boolean red = false;
-//        boolean done = false;
-
-//        while(!done) {
-//
-//            newGamPad2.updateState();
-//
-//            if (newGamPad2.b.released) {
-//                red = true;
-//            }
-//
-//            if(newGamPad2.a.released) {
-//                done  = true;
-//            }
-//        }
-
-        //code for the auto phase
         waitForStart();
 
-
-//
-//        Fun.forwardForDist(12, .5);
-
         while (opModeIsActive()) {
+
             follower.update();
             currentPose = follower.getPose();
 
-            buildPaths();
-            bFStateMachine();
+            rFStateMachine();
+
+
         }
-
-
     }
 
-    public void bFStateMachine() {
+    private void rFStateMachine() {
         switch (pathState) {
             case 0:
-                follower.followPath(BscorePreload, true);
+                follower.followPath(RscorePreload, true);
                 setPathState(1);
                 break;
             case 1:
                 if (!follower.isBusy()) {
+
                     Launch.autoLaunchFar();
-                    setPathState(-1);
+                    setPathState(2);
                 }
                 break;
             case 2:
                 if (!follower.isBusy()) {
-                    follower.followPath(Balign1, true);
+                    follower.followPath(Ralign1, true);
                     setPathState(3);
                 }
                 break;
@@ -174,7 +147,7 @@ public class BFauto extends LinearOpMode {
                 break;
             case 4:
                 if (!follower.isBusy()) {
-                    follower.followPath(Bintake1, true);
+                    follower.followPath(Rintake1, true);
                     setPathState(5);
                 }
                 break;
@@ -186,7 +159,7 @@ public class BFauto extends LinearOpMode {
                 break;
             case 6:
                 if (!follower.isBusy()) {
-                    follower.followPath(Bscore2, true);
+                    follower.followPath(Rscore2, true);
                     setPathState(7);
                 }
                 break;
@@ -198,10 +171,14 @@ public class BFauto extends LinearOpMode {
                 break;
             case 8:
                 if (!follower.isBusy()) {
-                    follower.followPath(Balign1, true);
+                    follower.followPath(Ralign1, true);
                     setPathState(-1);
                 }
                 break;
+
         }
     }
 }
+
+
+

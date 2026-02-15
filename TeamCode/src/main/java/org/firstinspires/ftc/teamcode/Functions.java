@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static java.lang.Thread.sleep;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -8,6 +7,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import com.pedropathing.util.PoseHistory;
 import com.pedropathing.follower.Follower;
+
+import org.firstinspires.ftc.teamcode.Subassys.Drivetrain;
+import org.firstinspires.ftc.teamcode.Subassys.Intake;
 
 public class Functions {
     //intalise varible
@@ -17,7 +19,7 @@ public class Functions {
 
     private LinearOpMode opmode = null;
 
-    Training Drive = new Training();
+    Drivetrain Drive = new Drivetrain();
     //    Limelight LL = new Limelight();
     Intake intake = new Intake();
 

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -7,6 +7,13 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.*;
 import com.pedropathing.paths.*;
 import com.pedropathing.util.*;
+
+import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Functions;
+import org.firstinspires.ftc.teamcode.GamepadStates;
+import org.firstinspires.ftc.teamcode.Subassys.Intake;
+import org.firstinspires.ftc.teamcode.Subassys.Launcher;
+import org.firstinspires.ftc.teamcode.Subassys.Drivetrain;
 
 @Autonomous(name = "RCauto", group = "Autonomous")
 public class RCauto extends LinearOpMode {
@@ -26,7 +33,7 @@ public class RCauto extends LinearOpMode {
     private Timer pathTimer, opModeTimer;
 
     Launcher Launch = new Launcher();
-    Intake Intake = new Intake();
+    org.firstinspires.ftc.teamcode.Subassys.Intake Intake = new Intake();
 
     private int pathState;
 
@@ -72,7 +79,7 @@ public class RCauto extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // declare subassembly classes
-        Training Drive = new Training();
+        Drivetrain Drive = new Drivetrain();
 
 //        SensorTraining Sensor = new SensorTraining();
 //        ServoTraining Servo = new ServoTraining();

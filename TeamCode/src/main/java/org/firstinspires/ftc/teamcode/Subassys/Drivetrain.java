@@ -1,11 +1,11 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Subassys;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class Training {
+public class Drivetrain {
 
 //    Create motor objects here
     private DcMotor FrontRM = null;
@@ -16,7 +16,7 @@ public class Training {
 private LinearOpMode opmode = null;
 
 
-    public Training() {
+    public Drivetrain() {
     }
 
     public void init(LinearOpMode opMode) {

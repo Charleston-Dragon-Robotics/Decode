@@ -1,13 +1,10 @@
-package org.firstinspires.ftc.teamcode;
-
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+package org.firstinspires.ftc.teamcode.Subassys;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.sun.tools.javac.util.Position;
 //import com.bylazar.
 
 public class Launcher {
@@ -19,7 +16,7 @@ public class Launcher {
     public Launcher() {
     }
 
-    Intake Intake = new Intake();
+    org.firstinspires.ftc.teamcode.Subassys.Intake Intake = new Intake();
 
     public void init(LinearOpMode opMode) {
         HardwareMap hwmap;
