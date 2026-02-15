@@ -52,16 +52,28 @@ public class Intake {
         IntakeM.setPower(0);
     }
     public void Feed(){
-        FeederM.setPower(1);
+        FeederM.setPower(0.5);
     }
 
-    public void FeedR() { FeederM.setPower(-0.2);}
+    public void FeedR() {
+        FeederM.setPower(-0.2);
+    }
+    public void Sort(){
+        FeederM.setPower(.5);
+        opmode.sleep(200);
+        FeederM.setPower(0);
+    }
     public void FeedStop(){
         FeederM.setPower(0);
     }
 
     public void Launch(double feedSpeed, double intakeSpeed) {
         FeederM.setPower(feedSpeed);
+        IntakeM.setPower(intakeSpeed);
+    }
+
+    public void Bunch(double feedSpeed, double intakeSpeed){
+        FeederM.setPower(-feedSpeed);
         IntakeM.setPower(intakeSpeed);
     }
     public void SLaunch() {

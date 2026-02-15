@@ -112,7 +112,6 @@ public class teleop extends LinearOpMode {
 
             //initialize speed as a variable
             telemetry.addData("Speed: ", speed);
-            telemetry.update();
 
 //            if (Color.isGreen()) {
 //                relativeLayout.setBackgroundColor(Color.greenV());
@@ -132,7 +131,6 @@ public class teleop extends LinearOpMode {
                 Train.stop();
                 Launcher.autoLaunchClose();
             } else if (newGamePad2.x.released) {
-
                 Train.stop();
                 Launcher.autoLaunchFar();
             } else if (newGamePad2.y.state) {
