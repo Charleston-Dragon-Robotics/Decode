@@ -60,7 +60,9 @@ public class Intake {
     }
     public void Sort(){
         FeederM.setPower(.5);
+        intake(.5);
         opmode.sleep(200);
+        stop();
         FeederM.setPower(0);
     }
     public void FeedStop(){
