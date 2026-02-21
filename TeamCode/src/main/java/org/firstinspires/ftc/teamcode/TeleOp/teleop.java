@@ -1,12 +1,20 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
 import android.app.Activity;
+import android.icu.util.ICUUncheckedIOException;
 import android.view.View;
 
+import com.pedropathing.follower.Follower;
+import com.pedropathing.geometry.BezierLine;
+import com.pedropathing.geometry.Pose;
+import com.pedropathing.paths.PathChain;
+import com.pedropathing.util.PoseHistory;
+import com.pedropathing.util.Timer;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Functions;
 import org.firstinspires.ftc.teamcode.GamepadStates;
 import org.firstinspires.ftc.teamcode.Subassys.Drivetrain;
@@ -19,9 +27,35 @@ import org.firstinspires.ftc.teamcode.Subassys.Launcher;
 // this is the thing that we run
 public class teleop extends LinearOpMode {
 
+    private Follower follower;
+    private Pose LockDown1 = new Pose(0, 0);
+    private Pose LockDown2 = new Pose(0, 0.0001);
+
+    private PathChain LockDown;
+
+    private Pose currentPose; // Current pose of the robot
+    static PoseHistory poseHistory;
+    private Timer pathTimer, opModeTimer;
     View relativeLayout;
 
     private Limelight3A limelight;
+
+    private int Pathstate;
+
+    private double x;
+    private double y;
+
+    public void buildPaths() {
+        LockDown = follower.pathBuilder()
+                .addPath(new BezierLine(LockDown1, LockDown2))
+                .setLinearHeadingInterpolation(LockDown1.getHeading(), LockDown1.getHeading())
+                .build();
+    }
+
+    public void setPathState(int pState) {
+        Pathstate = pState;
+        pathTimer.resetTimer();
+    }
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -66,10 +100,20 @@ public class teleop extends LinearOpMode {
 
         waitForStart();
 
+        follower = Constants.createFollower(hardwareMap);
+        follower.setStartingPose(LockDown1);
+
+        follower.update();
+        currentPose = follower.getPose();
+        buildPaths();
+
         while (opModeIsActive()) {
 
             newGamePad1.updateState();
             newGamePad2.updateState();
+
+            currentPose = follower.getPose();
+
 
 //            LL.detectPattern();
 
@@ -134,7 +178,8 @@ public class teleop extends LinearOpMode {
                 Train.stop();
                 Launcher.autoLaunchFar();
             } else if (newGamePad2.y.state) {
-                Intake.Launch(0.5, 0.6);
+//                Intake.Launch(0.5, 0.6);
+                Intake.Sort();
             }
             // launcher control
             else if (newGamePad2.right_trigger.state) {
@@ -166,5 +211,6 @@ public class teleop extends LinearOpMode {
 //            LLResult result = limelight.getLatestResult();
 //            LL.getResult();
         }
+
     }
 }

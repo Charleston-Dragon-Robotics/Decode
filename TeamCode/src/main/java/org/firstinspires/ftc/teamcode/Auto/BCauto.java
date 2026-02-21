@@ -20,12 +20,17 @@ public class BCauto extends LinearOpMode {
 
     private Follower follower; // Pedro Pathing follower
 
-    private final Pose BCScore = new Pose(17.75, -17, Math.toRadians(225)); // may want to use 155
-    private final Pose BCStart = new Pose(0, 0, Math.toRadians(225));
-    private final Pose B3A = new Pose(36.5, -10, Math.toRadians(90));
-    private final Pose B3C = new Pose(36.5, 13.5, Math.toRadians(90));
-    private final Pose BCScore2 = new Pose(53, 10.5, Math.toRadians(225));
-    private PathChain BscorePreload, Balign3, Bintake3, Bscore3;
+    private final Pose BFStart = new Pose(62.5, -15.5, Math.toRadians(180));
+    private final Pose BCStart = new Pose(-52, -51, Math.toRadians(225));
+    private final Pose BCScore = new Pose(-15,-15 , Math.toRadians(225));
+    private final Pose BFScore = new Pose(53, -10.5, Math.toRadians(210));
+    private final Pose B3A = new Pose(-12, -34, Math.toRadians(90));
+    private final Pose B3C = new Pose(-12, -51, Math.toRadians(90));
+    private final Pose B2A = new Pose(12, -34, Math.toRadians(90));
+    private final Pose B2C = new Pose(12, -51, Math.toRadians(90));
+    private final Pose B1A = new Pose(36, -34, Math.toRadians(90));
+    private final Pose B1C = new Pose(36, -51, Math.toRadians(90));
+    private PathChain BscorePreload, Balign3, Bintake3, Bscore3, Balign2, Bintake2, Bscore2, Balign1, Bintake1, Bscore1;
 
 
     private Pose currentPose; // Current pose of the robot
@@ -64,11 +69,39 @@ public class BCauto extends LinearOpMode {
                 .build();
 
         Bscore3 = follower.pathBuilder()
-                .addPath(new BezierLine(B3C, BCScore2))
-                .setLinearHeadingInterpolation(B3C.getHeading(), BCScore2.getHeading())
+                .addPath(new BezierLine(B3C, BCScore))
+                .setLinearHeadingInterpolation(B3C.getHeading(), BCScore.getHeading())
                 .build();
 
+        Balign2 = follower.pathBuilder()
+                .addPath(new BezierLine(BCScore, B2A))
+                .setLinearHeadingInterpolation(BCScore.getHeading(), B2A.getHeading())
+                .build();
 
+        Bintake3 = follower.pathBuilder()
+                .addPath(new BezierLine(B2A, B2C))
+                .setLinearHeadingInterpolation(B2A.getHeading(), B2C.getHeading())
+                .build();
+
+        Bscore2 = follower.pathBuilder()
+                .addPath(new BezierLine(B2C, BCScore))
+                .setLinearHeadingInterpolation(B2C.getHeading(), BFScore.getHeading())
+                .build();
+
+        Balign1 = follower.pathBuilder()
+                .addPath(new BezierLine(BCScore, B1A))
+                .setLinearHeadingInterpolation(BCScore.getHeading(), B3A.getHeading())
+                .build();
+
+        Bintake1 = follower.pathBuilder()
+                .addPath(new BezierLine(B1A, B1C))
+                .setLinearHeadingInterpolation(B3A.getHeading(), B3C.getHeading())
+                .build();
+
+        Bscore1 = follower.pathBuilder()
+                .addPath(new BezierLine(B3C, BCScore))
+                .setLinearHeadingInterpolation(B1C.getHeading(), BFScore.getHeading())
+                .build();
     }
 
     public void setPathState(int pState) {

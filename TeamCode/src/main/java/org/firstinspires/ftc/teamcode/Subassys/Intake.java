@@ -42,6 +42,7 @@ public class Intake {
     public void intake(double speed){
         // when intake is called, moves the motor forward with power value 1
         IntakeM.setPower(speed);
+        FeederM.setPower(-speed/4);
     }
     public void reverse(double speed){
         // when intake is called, moves the motor reverse with power value 1
@@ -60,7 +61,9 @@ public class Intake {
     }
     public void Sort(){
         FeederM.setPower(.5);
+        intake(.5);
         opmode.sleep(200);
+        stop();
         FeederM.setPower(0);
     }
     public void FeedStop(){

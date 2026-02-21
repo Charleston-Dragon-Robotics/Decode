@@ -24,10 +24,10 @@ public class BFauto extends LinearOpMode {
     private Follower follower; // Pedro Pathing follower
 
     private final Pose BFStart = new Pose(62.5, -15.5, Math.toRadians(180));
-    private final Pose BFScore = new Pose(53, -10.5, Math.toRadians(210));
+    private final Pose BFScore = new Pose(53, -10.5, Math.toRadians(215));
     private final Pose B1A = new Pose(24.25, -10, Math.toRadians(270));
     private final Pose B1C = new Pose(24.25, -40, Math.toRadians(270));
-    private final Pose BFScore2 = new Pose(53, -10.5, Math.toRadians(205));
+    private final Pose BFScore2 = new Pose(60, -5.5, Math.toRadians(215));
 
 
     private PathChain BscorePreload, Balign1, Bintake1, Bscore2;
