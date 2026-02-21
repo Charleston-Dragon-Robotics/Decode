@@ -25,12 +25,17 @@ public class BFauto extends LinearOpMode {
 
     private final Pose BFStart = new Pose(62.5, -15.5, Math.toRadians(180));
     private final Pose BFScore = new Pose(53, -10.5, Math.toRadians(215));
-    private final Pose B1A = new Pose(24.25, -10, Math.toRadians(270));
-    private final Pose B1C = new Pose(24.25, -40, Math.toRadians(270));
     private final Pose BFScore2 = new Pose(60, -5.5, Math.toRadians(215));
+    private final Pose BCScore = new Pose(-15,-15 , Math.toRadians(225));
+    private final Pose B3A = new Pose(-12, -34, Math.toRadians(90));
+    private final Pose B3C = new Pose(-12, -51, Math.toRadians(90));
+    private final Pose B2A = new Pose(12, -34, Math.toRadians(90));
+    private final Pose B2C = new Pose(12, -51, Math.toRadians(90));
+    private final Pose B1A = new Pose(36, -34, Math.toRadians(90));
+    private final Pose B1C = new Pose(36, -51, Math.toRadians(90));
 
 
-    private PathChain BscorePreload, Balign1, Bintake1, Bscore2;
+    private PathChain BscorePreload, Balign1, Bintake1, Bscore1, Balign3, Bintake3, Bscore3, Balign2, Bintake2, Bscore2;
 
 
     private Pose currentPose; // Current pose of the robot
@@ -71,15 +76,38 @@ public class BFauto extends LinearOpMode {
                 .setLinearHeadingInterpolation(B1A.getHeading(), B1C.getHeading())
                 .build();
 
-        Bscore2 = follower.pathBuilder()
+        Bscore1 = follower.pathBuilder()
                 .addPath(new BezierLine(B1C, BFScore2))
                 .setLinearHeadingInterpolation(B1C.getHeading(), BFScore2.getHeading())
                 .build();
+        Balign2 = follower.pathBuilder()
+                .addPath(new BezierLine(BFScore, B2A))
+                .setLinearHeadingInterpolation(BFScore.getHeading(), B1A.getHeading())
+                .build();
 
-        // caffeine is the only thing that can numb my brain enough for this to be possible 💔💔💔
-        // nobody can stop me from complaining here sighhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-        // robotics is fun but like this is really difficult ...
-        // coding is probably the worst job to have on this team bc if we go to worlds its just straight code work
+        Bintake2 = follower.pathBuilder()
+                .addPath(new BezierLine(B2A, B2C))
+                .setLinearHeadingInterpolation(B1A.getHeading(), B1C.getHeading())
+                .build();
+
+        Bscore2 = follower.pathBuilder()
+                .addPath(new BezierLine(B2C, BCScore))
+                .setLinearHeadingInterpolation(B1C.getHeading(), BFScore2.getHeading())
+                .build();
+        Balign3 = follower.pathBuilder()
+                .addPath(new BezierLine(BCScore, B3A))
+                .setLinearHeadingInterpolation(BFScore.getHeading(), B1A.getHeading())
+                .build();
+
+        Bintake3 = follower.pathBuilder()
+                .addPath(new BezierLine(B3A, B3C))
+                .setLinearHeadingInterpolation(B1A.getHeading(), B1C.getHeading())
+                .build();
+
+        Bscore3 = follower.pathBuilder()
+                .addPath(new BezierLine(B3C, BFScore2))
+                .setLinearHeadingInterpolation(B1C.getHeading(), BFScore2.getHeading())
+                .build();
 
     }
 
@@ -194,8 +222,8 @@ public class BFauto extends LinearOpMode {
                 break;
             case 6:
                 if (!follower.isBusy()) {
-                    follower.followPath(Bscore2, true);
-                    setPathState(7);
+                    follower.followPath(Bscore1, true);
+                    setPathState(-7);
                 }
                 break;
             case 7:
@@ -206,7 +234,79 @@ public class BFauto extends LinearOpMode {
                 break;
             case 8:
                 if (!follower.isBusy()) {
-                    follower.followPath(Balign1, true);
+                    follower.followPath(Balign2, true);
+                    setPathState(-1);
+                }
+                break;
+            case 9:
+                if (!follower.isBusy()) {
+                    Intake.intake(1);
+                    setPathState(10);
+                }
+                break;
+            case 10:
+                if (!follower.isBusy()) {
+                    follower.followPath(Bintake2, true);
+                    setPathState(11);
+                }
+                break;
+            case 11:
+                if (!follower.isBusy()) {
+                    Intake.stop();
+                    setPathState(12);
+                }
+                break;
+            case 12:
+                if (!follower.isBusy()) {
+                    follower.followPath(Bscore2, true);
+                    setPathState(13);
+                }
+                break;
+            case 13:
+                if (!follower.isBusy()) {
+                    Launch.autoLaunchFar();
+                    setPathState(14);
+                }
+                break;
+            case 14:
+                if (!follower.isBusy()) {
+                    follower.followPath(Balign3, true);
+                    setPathState(15);
+                }
+                break;
+            case 15:
+                if (!follower.isBusy()) {
+                    Intake.intake(1);
+                    setPathState(16);
+                }
+                break;
+            case 16:
+                if (!follower.isBusy()) {
+                    follower.followPath(Bintake3, true);
+                    setPathState(17);
+                }
+                break;
+            case 17:
+                if (!follower.isBusy()) {
+                    Intake.stop();
+                    setPathState(18);
+                }
+                break;
+            case 18:
+                if (!follower.isBusy()) {
+                    follower.followPath(Bscore3, true);
+                    setPathState(19);
+                }
+                break;
+            case 19:
+                if (!follower.isBusy()) {
+                    Launch.autoLaunchFar();
+                    setPathState(20);
+                }
+                break;
+            case 20:
+                if (!follower.isBusy()) {
+                    follower.followPath(Balign3, true);
                     setPathState(-1);
                 }
                 break;

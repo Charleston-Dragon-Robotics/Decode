@@ -23,6 +23,7 @@ public class BCauto extends LinearOpMode {
     private final Pose BFStart = new Pose(62.5, -15.5, Math.toRadians(180));
     private final Pose BCStart = new Pose(-52, -51, Math.toRadians(225));
     private final Pose BCScore = new Pose(-15,-15 , Math.toRadians(225));
+    private final Pose BCScore2 = new Pose(-15,-15 , Math.toRadians(225));
     private final Pose BFScore = new Pose(53, -10.5, Math.toRadians(210));
     private final Pose B3A = new Pose(-12, -34, Math.toRadians(90));
     private final Pose B3C = new Pose(-12, -51, Math.toRadians(90));
@@ -78,18 +79,18 @@ public class BCauto extends LinearOpMode {
                 .setLinearHeadingInterpolation(BCScore.getHeading(), B2A.getHeading())
                 .build();
 
-        Bintake3 = follower.pathBuilder()
+        Bintake2 = follower.pathBuilder()
                 .addPath(new BezierLine(B2A, B2C))
                 .setLinearHeadingInterpolation(B2A.getHeading(), B2C.getHeading())
                 .build();
 
         Bscore2 = follower.pathBuilder()
-                .addPath(new BezierLine(B2C, BCScore))
+                .addPath(new BezierLine(B2C, BFScore))
                 .setLinearHeadingInterpolation(B2C.getHeading(), BFScore.getHeading())
                 .build();
 
         Balign1 = follower.pathBuilder()
-                .addPath(new BezierLine(BCScore, B1A))
+                .addPath(new BezierLine(BFScore, B1A))
                 .setLinearHeadingInterpolation(BCScore.getHeading(), B3A.getHeading())
                 .build();
 
@@ -99,7 +100,7 @@ public class BCauto extends LinearOpMode {
                 .build();
 
         Bscore1 = follower.pathBuilder()
-                .addPath(new BezierLine(B3C, BCScore))
+                .addPath(new BezierLine(B3C, BFScore))
                 .setLinearHeadingInterpolation(B1C.getHeading(), BFScore.getHeading())
                 .build();
     }
@@ -155,7 +156,7 @@ public class BCauto extends LinearOpMode {
         switch (pathState) {
             case 0:
                 follower.followPath(BscorePreload, true);
-                setPathState(1);
+                setPathState(-1);
                 break;
             case 1:
                 if (!follower.isBusy()) {
@@ -201,11 +202,82 @@ public class BCauto extends LinearOpMode {
                 break;
             case 8:
                 if (!follower.isBusy()) {
-                    follower.followPath(Balign3, true);
+                    follower.followPath(Balign2, true);
+                    setPathState(9);
+                }
+                break;
+            case 9:
+                if (!follower.isBusy()) {
+                    Intake.intake(1);
+                    setPathState(10);
+                }
+                break;
+            case 10:
+                if (!follower.isBusy()) {
+                    follower.followPath(Bintake2, true);
+                    setPathState(11);
+                }
+                break;
+            case 11:
+                if (!follower.isBusy()) {
+                    Intake.stop();
+                    setPathState(12);
+                }
+                break;
+            case 12:
+                if (!follower.isBusy()) {
+                    follower.followPath(Bscore2, true);
+                    setPathState(13);
+                }
+                break;
+            case 13:
+                if (!follower.isBusy()) {
+                    Launch.autoLaunchFar();
+                    setPathState(14);
+                }
+                break;
+            case 14:
+                if (!follower.isBusy()) {
+                    follower.followPath(Balign1, true);
+                    setPathState(15);
+                }
+                break;
+            case 15:
+                if (!follower.isBusy()) {
+                    Intake.intake(1);
+                    setPathState(16);
+                }
+                break;
+            case 16:
+                if (!follower.isBusy()) {
+                    follower.followPath(Bintake1, true);
+                    setPathState(17);
+                }
+                break;
+            case 17:
+                if (!follower.isBusy()) {
+                    Intake.stop();
+                    setPathState(18);
+                }
+                break;
+            case 18:
+                if (!follower.isBusy()) {
+                    follower.followPath(Bscore1, true);
+                    setPathState(19);
+                }
+                break;
+            case 19:
+                if (!follower.isBusy()) {
+                    Launch.autoLaunchFar();
+                    setPathState(20);
+                }
+                break;
+            case 20:
+                if (!follower.isBusy()) {
+                    follower.followPath(Balign1, true);
                     setPathState(-1);
                 }
                 break;
-
         }
     }
 }

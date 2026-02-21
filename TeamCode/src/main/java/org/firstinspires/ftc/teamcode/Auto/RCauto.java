@@ -19,14 +19,18 @@ import org.firstinspires.ftc.teamcode.Subassys.Drivetrain;
 public class RCauto extends LinearOpMode {
 
     private Follower follower; // Pedro Pathing follower
-
-    private final Pose RCScore = new Pose(-48, 0, Math.toRadians(135)); // may want to use 155
-    private final Pose RCStart = new Pose(0, 0, Math.toRadians(135));
-    private final Pose R3A = new Pose(36.5, -10, Math.toRadians(90));
-    private final Pose R3C = new Pose(36.5, 13.5, Math.toRadians(90));
-    private final Pose RCScore2 = new Pose(53, 10.5, Math.toRadians(160));
-    private PathChain RscorePreload, Ralign3, Rintake3, Rscore3;
-
+    private final Pose RCStart = new Pose(-52, 51, Math.toRadians(225));
+    private final Pose RFStart = new Pose(62.5, 15.5, Math.toRadians(180));
+    private final Pose RFScore = new Pose(53, 10.5, Math.toRadians(215));
+    private final Pose RFScore2 = new Pose(60, 5.5, Math.toRadians(215));
+    private final Pose RCScore = new Pose(-15,15 , Math.toRadians(225));
+    private final Pose R3A = new Pose(-12, 34, Math.toRadians(90));
+    private final Pose R3C = new Pose(-12, 51, Math.toRadians(90));
+    private final Pose R2A = new Pose(12, 34, Math.toRadians(90));
+    private final Pose R2C = new Pose(12, 51, Math.toRadians(90));
+    private final Pose R1A = new Pose(36, 34, Math.toRadians(90));
+    private final Pose R1C = new Pose(36, 51, Math.toRadians(90));
+    private PathChain RscorePreload, Ralign1, Rintake1, Rscore1, Ralign3, Rintake3, Rscore3, Ralign2, Rintake2, Rscore2;
 
     private Pose currentPose; // Current pose of the robot
     static PoseHistory poseHistory;
@@ -53,19 +57,47 @@ public class RCauto extends LinearOpMode {
                 .setLinearHeadingInterpolation(RCStart.getHeading(), RCScore.getHeading())
                 .build();
 
+        Ralign1 = follower.pathBuilder()
+                .addPath(new BezierLine(RFScore, R1A))
+                .setLinearHeadingInterpolation(RFScore.getHeading(), R1A.getHeading())
+                .build();
+
+        Rintake1 = follower.pathBuilder()
+                .addPath(new BezierLine(R1A, R1C))
+                .setLinearHeadingInterpolation(R1A.getHeading(), R1C.getHeading())
+                .build();
+
+        Rscore1 = follower.pathBuilder()
+                .addPath(new BezierLine(R1C, RFScore2))
+                .setLinearHeadingInterpolation(R1C.getHeading(), RFScore2.getHeading())
+                .build();
+        Ralign2 = follower.pathBuilder()
+                .addPath(new BezierLine(RFScore, R2A))
+                .setLinearHeadingInterpolation(RFScore.getHeading(), R1A.getHeading())
+                .build();
+
+        Rintake2 = follower.pathBuilder()
+                .addPath(new BezierLine(R2A, R2C))
+                .setLinearHeadingInterpolation(R1A.getHeading(), R1C.getHeading())
+                .build();
+
+        Rscore2 = follower.pathBuilder()
+                .addPath(new BezierLine(R2C, RCScore))
+                .setLinearHeadingInterpolation(R1C.getHeading(), RFScore2.getHeading())
+                .build();
         Ralign3 = follower.pathBuilder()
                 .addPath(new BezierLine(RCScore, R3A))
-                .setLinearHeadingInterpolation(RCScore.getHeading(), R3A.getHeading())
+                .setLinearHeadingInterpolation(RFScore.getHeading(), R1A.getHeading())
                 .build();
 
         Rintake3 = follower.pathBuilder()
                 .addPath(new BezierLine(R3A, R3C))
-                .setLinearHeadingInterpolation(R3A.getHeading(), R3C.getHeading())
+                .setLinearHeadingInterpolation(R1A.getHeading(), R1C.getHeading())
                 .build();
 
         Rscore3 = follower.pathBuilder()
-                .addPath(new BezierLine(R3C, RCScore2))
-                .setLinearHeadingInterpolation(R3C.getHeading(), RCScore2.getHeading())
+                .addPath(new BezierLine(R3C, RFScore2))
+                .setLinearHeadingInterpolation(R1C.getHeading(), RFScore2.getHeading())
                 .build();
 
 
@@ -122,7 +154,7 @@ public class RCauto extends LinearOpMode {
         switch (pathState) {
             case 0:
                 follower.followPath(RscorePreload, true);
-                setPathState(11);
+                setPathState(-1);
                 break;
             case 1:
                 if (!follower.isBusy()) {
@@ -168,7 +200,79 @@ public class RCauto extends LinearOpMode {
                 break;
             case 8:
                 if (!follower.isBusy()) {
-                    follower.followPath(Ralign3, true);
+                    follower.followPath(Ralign2, true);
+                    setPathState(9);
+                }
+                break;
+            case 9:
+                if (!follower.isBusy()) {
+                    Intake.intake(1);
+                    setPathState(10);
+                }
+                break;
+            case 10:
+                if (!follower.isBusy()) {
+                    follower.followPath(Rintake2, true);
+                    setPathState(11);
+                }
+                break;
+            case 11:
+                if (!follower.isBusy()) {
+                    Intake.stop();
+                    setPathState(12);
+                }
+                break;
+            case 12:
+                if (!follower.isBusy()) {
+                    follower.followPath(Rscore2, true);
+                    setPathState(13);
+                }
+                break;
+            case 13:
+                if (!follower.isBusy()) {
+                    Launch.autoLaunchFar();
+                    setPathState(14);
+                }
+                break;
+            case 14:
+                if (!follower.isBusy()) {
+                    follower.followPath(Ralign1, true);
+                    setPathState(15);
+                }
+                break;
+            case 15:
+                if (!follower.isBusy()) {
+                    Intake.intake(1);
+                    setPathState(16);
+                }
+                break;
+            case 16:
+                if (!follower.isBusy()) {
+                    follower.followPath(Rintake1, true);
+                    setPathState(17);
+                }
+                break;
+            case 17:
+                if (!follower.isBusy()) {
+                    Intake.stop();
+                    setPathState(18);
+                }
+                break;
+            case 18:
+                if (!follower.isBusy()) {
+                    follower.followPath(Rscore1, true);
+                    setPathState(19);
+                }
+                break;
+            case 19:
+                if (!follower.isBusy()) {
+                    Launch.autoLaunchFar();
+                    setPathState(20);
+                }
+                break;
+            case 20:
+                if (!follower.isBusy()) {
+                    follower.followPath(Ralign1, true);
                     setPathState(-1);
                 }
                 break;
