@@ -31,6 +31,7 @@ public class Intake {
         IntakeM.setDirection(DcMotorSimple.Direction.FORWARD);
         FeederM.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        FeederM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // sets power to 0 to make sure nothing moves at first
         IntakeM.setPower(0);
@@ -42,7 +43,7 @@ public class Intake {
     public void intake(double speed){
         // when intake is called, moves the motor forward with power value 1
         IntakeM.setPower(speed);
-        FeederM.setPower(-speed/4);
+        FeederM.setPower(-.2);
     }
     public void reverse(double speed){
         // when intake is called, moves the motor reverse with power value 1
@@ -53,7 +54,7 @@ public class Intake {
         IntakeM.setPower(0);
     }
     public void Feed(){
-        FeederM.setPower(0.5);
+        FeederM.setPower(0.8);
     }
 
     public void FeedR() {
@@ -61,10 +62,10 @@ public class Intake {
     }
     public void Sort(){
         FeederM.setPower(.5);
-        intake(.5);
-        opmode.sleep(200);
-        stop();
-        FeederM.setPower(0);
+        IntakeM.setPower(.9);
+//        opmode.sleep(200);
+//        stop();
+//        FeederM.setPower(0);
     }
     public void FeedStop(){
         FeederM.setPower(0);

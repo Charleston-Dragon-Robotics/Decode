@@ -168,7 +168,7 @@ public class teleop extends LinearOpMode {
                 // grab ball
                 Intake.intake(.9);
                 Launcher.stop();
-            } else if ((gamepad2.left_stick_y < -.4) && gamepad2.dpad_down) {
+            } else if ((gamepad2.left_stick_y < -.4) && newGamePad2.left_bumper.state) {
                 // expel ball
                 Intake.reverse(0.75);
             } else if (newGamePad2.a.state) {
@@ -186,7 +186,7 @@ public class teleop extends LinearOpMode {
                 Launcher.manualLauncher();
 //                Launcher.getV();
             } else {
-                Launcher.stop();
+//                Launcher.stop();
                 Intake.FeedStop();
                 Intake.stop();
             }

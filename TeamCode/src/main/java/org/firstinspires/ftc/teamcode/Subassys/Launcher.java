@@ -93,6 +93,8 @@ public class Launcher {
         launch(1050);
         opmode.sleep(100);
         launch(1050);
+        stop();
+
     }
     public void autoLaunchClose() {
         Intake.FeedR();
@@ -101,12 +103,13 @@ public class Launcher {
         launch(950);
         opmode.sleep(100);
         launch(950);
+        stop();
     }
 
     private void launch(double velocity)
     {
         manualLauncher();
-        Intake.intake(0.85);
+//        Intake.intake(0.85);
         opmode.sleep(450);
         while (opmode.opModeIsActive() && !isAtVelocity(velocity)){
             opmode.telemetry.addData("SpinUp isAtVelocity is", isAtVelocity(velocity));
@@ -114,12 +117,13 @@ public class Launcher {
             opmode.telemetry.addLine("LLM Velocity: " + LLM.getVelocity());
             opmode.telemetry.update();
         }
-        Intake.Bunch(0,.4);
-        while(opmode.opModeIsActive() && RLM.getVelocity() > (velocity - 30) && LLM.getVelocity() > (velocity - 30))
+        //Intake.Bunch(0,.4);
+        while(opmode.opModeIsActive() && RLM.getVelocity() > (velocity - 50) && LLM.getVelocity() > (velocity - 50))
         {
-            Intake.Feed();
+            Intake.Sort();
         }
         Intake.FeedStop();
+        Intake.stop();
     }
 //    public void autoLaunchFar() {
 //        manualLauncher();

@@ -25,14 +25,14 @@ public class BFauto extends LinearOpMode {
 
     private final Pose BFStart = new Pose(62.5, -15.5, Math.toRadians(180));
     private final Pose BFScore = new Pose(53, -10.5, Math.toRadians(215));
-    private final Pose BFScore2 = new Pose(60, -5.5, Math.toRadians(215));
+    private final Pose BFScore2 = new Pose(52, -5.5, Math.toRadians(215));
     private final Pose BCScore = new Pose(-15,-15 , Math.toRadians(225));
-    private final Pose B3A = new Pose(-12, -34, Math.toRadians(90));
-    private final Pose B3C = new Pose(-12, -51, Math.toRadians(90));
-    private final Pose B2A = new Pose(12, -34, Math.toRadians(90));
-    private final Pose B2C = new Pose(12, -51, Math.toRadians(90));
-    private final Pose B1A = new Pose(36, -34, Math.toRadians(90));
-    private final Pose B1C = new Pose(36, -51, Math.toRadians(90));
+    private final Pose B3A = new Pose(-20, -34, Math.toRadians(270));
+    private final Pose B3C = new Pose(-20, -51, Math.toRadians(270));
+    private final Pose B2A = new Pose(4, -34, Math.toRadians(270));
+    private final Pose B2C = new Pose(4, -51, Math.toRadians(270));
+    private final Pose B1A = new Pose(28, -34, Math.toRadians(270));
+    private final Pose B1C = new Pose(28, -51, Math.toRadians(270));
 
 
     private PathChain BscorePreload, Balign1, Bintake1, Bscore1, Balign3, Bintake3, Bscore3, Balign2, Bintake2, Bscore2;
@@ -199,7 +199,7 @@ public class BFauto extends LinearOpMode {
             case 2:
                 if (!follower.isBusy()) {
                     follower.followPath(Balign1, true);
-                    setPathState(3);
+                    setPathState(-3);
                 }
                 break;
             case 3:
