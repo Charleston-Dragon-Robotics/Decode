@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.GamepadStates;
 import org.firstinspires.ftc.teamcode.Subassys.Drivetrain;
 import org.firstinspires.ftc.teamcode.Subassys.Intake;
 import org.firstinspires.ftc.teamcode.Subassys.Launcher;
+import org.firstinspires.ftc.teamcode.Limelight;
 //import com.bylazar.
 
 
@@ -39,7 +40,7 @@ public class teleop extends LinearOpMode {
         // Is this still/will be needed?
 //        ServoTraining Servo = new ServoTraining();
 
-////        Limelight LL = new Limelight();
+        Limelight LL = new Limelight();
 //        Color Color = new Color();
 
         // initialize subassembly classes
@@ -48,15 +49,15 @@ public class teleop extends LinearOpMode {
         Launcher.init(this);
         Fun.init(this);
 //        Servo.init(this);
-//        LL.init(this);
+        LL.init(this);
 //        Color.init(this);
 
         //List fiducialResult;
 
-        //limelight = hardwareMap.get(Limelight3A.class, "limelight");
-//        telemetry.setMsTransmissionInterval(11);
-//        limelight.pipelineSwitch(7);
-//        limelight.start();
+        limelight = hardwareMap.get(Limelight3A.class, "limelight");
+        telemetry.setMsTransmissionInterval(11);
+        limelight.pipelineSwitch(7);
+        limelight.start();
 
         GamepadStates newGamePad1 = new GamepadStates(gamepad1);
         GamepadStates newGamePad2 = new GamepadStates(gamepad2);
@@ -72,7 +73,7 @@ public class teleop extends LinearOpMode {
             newGamePad1.updateState();
             newGamePad2.updateState();
 
-//            LL.detectPattern();
+            LL.detectPattern();
 
             // controls movement
 
@@ -172,6 +173,8 @@ public class teleop extends LinearOpMode {
 
 //            LLResult result = limelight.getLatestResult();
 //            LL.getResult();
+
+            LL.trackAT();
         }
     }
 }

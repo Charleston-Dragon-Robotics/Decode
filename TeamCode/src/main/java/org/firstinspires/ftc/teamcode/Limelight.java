@@ -76,4 +76,17 @@ public class Limelight {
         }
         opmode.telemetry.update();
     }
+
+    public void trackAT(){
+        limelight.start();
+        LLResult result = limelight.getLatestResult();
+        if (result.isValid()) {
+
+
+            opmode.telemetry.addData("Tx", "%f2", result.getTx());
+//            opmode.telemetry.addData("Ty",result.getTy());
+//            opmode.telemetry.addData("Ta",result.getTa());
+        }
+        opmode.telemetry.update();
+    }
 }
