@@ -22,7 +22,6 @@ public class RFauto extends LinearOpMode {
 
     private final Pose RFStart = new Pose(62.5, 15.5, Math.toRadians(180));
     private final Pose RFScore = new Pose(53, 10.5, Math.toRadians(215));
-    private final Pose RFScore2 = new Pose(60, 5.5, Math.toRadians(215));
     private final Pose RCScore = new Pose(-15,15 , Math.toRadians(225));
     private final Pose R3A = new Pose(-12, 34, Math.toRadians(90));
     private final Pose R3C = new Pose(-12, 51, Math.toRadians(90));
@@ -69,8 +68,8 @@ public class RFauto extends LinearOpMode {
                 .build();
 
         Rscore1 = follower.pathBuilder()
-                .addPath(new BezierLine(R1C, RFScore2))
-                .setLinearHeadingInterpolation(R1C.getHeading(), RFScore2.getHeading())
+                .addPath(new BezierLine(R1C, RFScore))
+                .setLinearHeadingInterpolation(R1C.getHeading(), RFScore.getHeading())
                 .build();
         Ralign2 = follower.pathBuilder()
                 .addPath(new BezierLine(RFScore, R2A))
@@ -84,7 +83,7 @@ public class RFauto extends LinearOpMode {
 
         Rscore2 = follower.pathBuilder()
                 .addPath(new BezierLine(R2C, RCScore))
-                .setLinearHeadingInterpolation(R1C.getHeading(), RFScore2.getHeading())
+                .setLinearHeadingInterpolation(R1C.getHeading(), RFScore.getHeading())
                 .build();
         Ralign3 = follower.pathBuilder()
                 .addPath(new BezierLine(RCScore, R3A))
@@ -97,8 +96,8 @@ public class RFauto extends LinearOpMode {
                 .build();
 
         Rscore3 = follower.pathBuilder()
-                .addPath(new BezierLine(R3C, RFScore2))
-                .setLinearHeadingInterpolation(R1C.getHeading(), RFScore2.getHeading())
+                .addPath(new BezierLine(R3C, RFScore))
+                .setLinearHeadingInterpolation(R1C.getHeading(), RFScore.getHeading())
                 .build();
 
 

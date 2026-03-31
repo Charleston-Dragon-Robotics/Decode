@@ -25,7 +25,6 @@ public class BFauto extends LinearOpMode {
 
     private final Pose BFStart = new Pose(62.5, -15.5, Math.toRadians(180));
     private final Pose BFScore = new Pose(53, -10.5, Math.toRadians(215));
-    private final Pose BFScore2 = new Pose(52, -5.5, Math.toRadians(215));
     private final Pose BCScore = new Pose(-15,-15 , Math.toRadians(225));
     private final Pose B3A = new Pose(-20, -34, Math.toRadians(270));
     private final Pose B3C = new Pose(-20, -51, Math.toRadians(270));
@@ -77,8 +76,8 @@ public class BFauto extends LinearOpMode {
                 .build();
 
         Bscore1 = follower.pathBuilder()
-                .addPath(new BezierLine(B1C, BFScore2))
-                .setLinearHeadingInterpolation(B1C.getHeading(), BFScore2.getHeading())
+                .addPath(new BezierLine(B1C, BFScore))
+                .setLinearHeadingInterpolation(B1C.getHeading(), BFScore.getHeading())
                 .build();
         Balign2 = follower.pathBuilder()
                 .addPath(new BezierLine(BFScore, B2A))
@@ -92,7 +91,7 @@ public class BFauto extends LinearOpMode {
 
         Bscore2 = follower.pathBuilder()
                 .addPath(new BezierLine(B2C, BCScore))
-                .setLinearHeadingInterpolation(B1C.getHeading(), BFScore2.getHeading())
+                .setLinearHeadingInterpolation(B1C.getHeading(), BFScore.getHeading())
                 .build();
         Balign3 = follower.pathBuilder()
                 .addPath(new BezierLine(BCScore, B3A))
@@ -105,8 +104,8 @@ public class BFauto extends LinearOpMode {
                 .build();
 
         Bscore3 = follower.pathBuilder()
-                .addPath(new BezierLine(B3C, BFScore2))
-                .setLinearHeadingInterpolation(B1C.getHeading(), BFScore2.getHeading())
+                .addPath(new BezierLine(B3C, BFScore))
+                .setLinearHeadingInterpolation(B1C.getHeading(), BFScore.getHeading())
                 .build();
 
     }

@@ -23,7 +23,6 @@ public class BCauto extends LinearOpMode {
     private final Pose BFStart = new Pose(62.5, -15.5, Math.toRadians(180));
     private final Pose BCStart = new Pose(-52, -51, Math.toRadians(225));
     private final Pose BCScore = new Pose(-15,-15 , Math.toRadians(225));
-    private final Pose BCScore2 = new Pose(-15,-15 , Math.toRadians(225));
     private final Pose BFScore = new Pose(53, -10.5, Math.toRadians(210));
     private final Pose B3A = new Pose(-12, -34, Math.toRadians(90));
     private final Pose B3C = new Pose(-12, -51, Math.toRadians(90));
