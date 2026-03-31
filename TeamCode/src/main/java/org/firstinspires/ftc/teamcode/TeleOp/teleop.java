@@ -174,7 +174,9 @@ public class teleop extends LinearOpMode {
 //            LLResult result = limelight.getLatestResult();
 //            LL.getResult();
 
-            LL.trackAT();
+            if (newGamePad1.a.state){
+                Train.multi(0,0, LL.trackAT());
+            }
         }
     }
 }

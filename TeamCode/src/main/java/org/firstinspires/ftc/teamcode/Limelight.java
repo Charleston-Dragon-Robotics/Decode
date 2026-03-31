@@ -77,7 +77,7 @@ public class Limelight {
         opmode.telemetry.update();
     }
 
-    public void trackAT(){
+    public double trackAT(){
         limelight.start();
         LLResult result = limelight.getLatestResult();
         if (result.isValid()) {
@@ -88,5 +88,6 @@ public class Limelight {
 //            opmode.telemetry.addData("Ta",result.getTa());
         }
         opmode.telemetry.update();
+        return result.getTx();
     }
 }
